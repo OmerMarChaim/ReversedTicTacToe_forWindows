@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using ReverseTicTacToeGame;
 
-namespace ReverseTicTacToeGame
+namespace GameLogic
 {
     internal class Board
     {
