@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using GameLogic;
-
+using static UserInterfaceWindows;
 namespace ReverseTicTacToeGame
 {
     internal class GameLogic
@@ -57,7 +57,7 @@ namespace ReverseTicTacToeGame
             get { return m_GameBoard; }
         }
 
-        public void OneRoundInGame(UserInterface i_GameUi)
+        public void OneRoundInGame(UserInterfaceWindows i_GameUi)
         {
             Player[] players = { m_Player1, m_Player2 };
             foreach(Player player in players)

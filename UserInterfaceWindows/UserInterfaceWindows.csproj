@@ -39,6 +39,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameBoardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameManeger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="StartGameForm.cs">
       <SubType>Form</SubType>
@@ -60,6 +64,9 @@
   <ItemGroup>
     <EmbeddedResource Include="InitGameForm.resx">
       <DependentUpon>InitGameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StartGameForm.resx">
+      <DependentUpon>StartGameForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
