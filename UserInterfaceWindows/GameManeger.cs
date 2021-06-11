@@ -14,6 +14,75 @@ namespace UserInterfaceWindows
         private const char k_Player1Sign = k_Cross;
         private const char k_Player2Sign = k_Circle;
         private GameLogic m_Game;
-        InitGameForm();
+        internal GameManeger(GameLogic i_Game)
+        {
+            m_Game = i_Game;
+        }
+
+        public static void InitGame() // Checked
+        {
+
+            int boardSize; // get from Startform
+            bool player1IsComputer = false;
+            bool player2IsComputer; //get from Startform
+            GameLogic game = new GameLogic(boardSize, player1IsComputer, player2IsComputer);
+            GameManeger gameUi = new GameManeger(game);
+
+            gameUi.startGame();
+
+        }
+        private void startGame() // Checked
+        {
+            bool wantAnotherGameFlag = true;
+
+            while (wantAnotherGameFlag)
+            {
+                while (this.m_Game.CurrentGameState == GameLogic.eGameState.Playing)
+                {
+                    this.m_Game.OneRoundInGame(this);
+                }
+
+                updateTheUserInterfaceAccordingTheState();
+                wantAnotherGameFlag = isUserWantAnotherGame();
+            }
+        }
+        /// <summary>
+        /// chaeck by ui ig User Want another game
+        /// </summary>
+        /// <returns></returns>
+        private bool isUserWantAnotherGame()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void updateTheUserInterfaceAccordingTheState()
+        {
+            throw new NotImplementedException();
+
+        }
+        private static void TieMessage() // Checked
+        {
+           // Console.WriteLine("No one is going to win this game, there's a tie! This game is over without winner.");
+        }
+
+        private static void WinMessage(ePlayersMark i_SignOfTheWinner)
+        {
+           // Console.WriteLine($"Well done! The winner in this round is : {i_SignOfTheWinner}");
+        }
+
+        private static void QuitMessage(ePlayersMark i_SignOfTheWinner)
+        {
+           // Console.WriteLine($"You Quit from the Game! The winner in this round is : {i_SignOfTheWinner}");
+        }
+
+
+
+
+
+
+
+
+
+
     }
 }
