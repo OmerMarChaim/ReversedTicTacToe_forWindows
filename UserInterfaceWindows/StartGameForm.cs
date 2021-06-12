@@ -134,12 +134,27 @@ namespace UserInterfaceWindows
             m_IsComputerBox.Checked = false;
             m_IsComputerBox.Size = new Size(20, 20);
             m_IsComputerBox.Location = new Point(20, 70);
+            m_IsComputerBox.Click += m_IsComputerBox_Click;
             this.Controls.Add(m_IsComputerBox);
+            
 
             m_Player2Name = new TextBox();
             m_Player2Name.Location = new Point(150, 70);
+            m_Player2Name.Enabled = false;
+            m_Player2Name.Text = "[Computer]";
             this.Controls.Add(m_Player2Name);
+            
 
+        }
+
+        private void m_IsComputerBox_Click(object i_Sender, EventArgs i_E)
+        {
+            m_IsComputerBox.Checked = !m_IsComputerBox.Checked;
+            m_Player2Name.Enabled = !m_Player2Name.Enabled;
+            if(m_Player2Name.Enabled == false)
+            {
+                m_Player2Name.Text = "[Computer]";
+            }
         }
 
         private void setButtonStart()
