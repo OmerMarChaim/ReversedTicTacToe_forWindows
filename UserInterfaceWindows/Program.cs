@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReverseTicTacToeGame;
 
 namespace UserInterfaceWindows
 {
@@ -10,9 +11,10 @@ namespace UserInterfaceWindows
     {
         public static void Main()
         {
-            StartGameForm startGame= new StartGameForm();
+            StartGameForm startGameForm = new StartGameForm();
+            startGameForm.ShowDialog();
+            GameManeger game = new GameManeger(startGameForm);
 
-            startGame.ShowDialog();
         }
     }
 }

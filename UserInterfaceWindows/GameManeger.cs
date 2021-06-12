@@ -19,17 +19,18 @@ namespace UserInterfaceWindows
         private const char k_Player1Sign = k_Cross;
         private const char k_Player2Sign = k_Circle;
         private GameLogic m_Game;
-        private static StartGameForm m_SettingsForm;
-        internal GameManeger(GameLogic i_Game)
+        private StartGameForm m_SettingsForm;
+        internal GameManeger(StartGameForm i_SettingsForm)
         {
-            m_Game = i_Game;
-            m_SettingsForm = new StartGameForm();
-
-            m_SettingsForm.ShowDialog();
+            m_SettingsForm = i_SettingsForm;
+            int boardSize = (int)m_SettingsForm.NumberOfColsAndRows;
+            bool player2IsComputer = m_SettingsForm.IsComputerBox;
+            m_Game = new GameLogic(boardSize, false, player2IsComputer);
+            this.InitGame(m_SettingsForm.Player1Name, m_SettingsForm.Player2Name,player2IsComputer, boardSize);
         }
 
        
-        public static void InitGame(string i_Player1Name, bool i_Player2IsComputer, string i_Player2Name, int i_Size) // Checked
+        public void InitGame(string i_Player1Name,string i_Player2Name, bool i_Player2IsComputer, int i_Size)
         {
            
             int boardSize=i_Size;
@@ -39,29 +40,32 @@ namespace UserInterfaceWindows
             bool player1IsComputer = false; 
             bool player2IsComputer= i_Player2IsComputer; 
 
-            GameLogic game = new GameLogic(boardSize, player1IsComputer, player2IsComputer);
-
-            GameManeger gameUi = new GameManeger(game);
+            // GameLogic game = new GameLogic(boardSize, player1IsComputer, player2IsComputer);
 
             m_SettingsForm.Hide();
-            gameUi.startGame();
+            this.startGame();
 
         }
-        private void startGame() // Checked
+        
+        private void startGame()
         {
-            bool wantAnotherGameFlag = true;
-
-            while (wantAnotherGameFlag)
-            {
-                while (this.m_Game.CurrentGameState == GameLogic.eGameState.Playing)
-                {
-                 //  this.m_Game.OneRoundInGame();
-                }
-
-                updateTheUserInterfaceAccordingTheState();
-                wantAnotherGameFlag = isUserWantAnotherGame();
-            }
+            
         }
+        // private void startGame() // Checked
+        // {
+        //     bool wantAnotherGameFlag = true;
+        //
+        //     while (wantAnotherGameFlag)
+        //     {
+        //         while (this.m_Game.CurrentGameState == GameLogic.eGameState.Playing)
+        //         {
+        //          //  this.m_Game.OneRoundInGame();
+        //         }
+        //
+        //         updateTheUserInterfaceAccordingTheState();
+        //         wantAnotherGameFlag = isUserWantAnotherGame();
+        //     }
+        // }
         /// <summary>
         /// chaeck by ui ig User Want another game
         /// </summary>

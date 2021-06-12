@@ -22,6 +22,26 @@ namespace UserInterfaceWindows
         private Label m_BoardSize;
         private NumericUpDown m_RowsNumericUpDown;
         private NumericUpDown m_ColsNumericUpDown;
+
+        public string Player1Name
+        {
+            get { return m_Player1Name.Text; }
+        }
+        public string Player2Name
+        {
+            get { return m_Player2Name.Text; }
+        }
+
+        public bool IsComputerBox
+        {
+            get { return m_IsComputerBox.Checked; }
+        }
+
+        public decimal NumberOfColsAndRows
+        {
+            get { return m_ColsNumericUpDown.Value; }
+        }
+        
         public StartGameForm()
         {
             this.Text = "Game Settings";
@@ -34,7 +54,7 @@ namespace UserInterfaceWindows
             setNumericUpDown();
 
             //action when start button press -> need to init game
-         
+
         }
 
         private void setNumericUpDown()
@@ -169,7 +189,7 @@ namespace UserInterfaceWindows
 
         private void m_ButtonStart_Click(object i_Sender, EventArgs i_E)
         {
-            GameManeger.InitGame(m_Player1Name.Text,m_IsComputerBox.Checked,m_Player2Name.Text,(int )m_ColsNumericUpDown.Value); 
+            this.Hide();
         }
 
         private void InitializeComponent()
