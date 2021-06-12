@@ -22,10 +22,14 @@ namespace UserInterfaceWindows
 
         public static void InitGame() // Checked
         {
-
-            int boardSize= -1; //Todo get from Startform
+            //get Object from StartGameForm
+            int boardSize= -1;
+            //Todo get from Startform
+            string player1Name = "";
+            string player2Name = "";
             bool player1IsComputer = false; 
-            bool player2IsComputer=false; //todo get from Startform
+            bool player2IsComputer=false; 
+            //todo get from Startform
 
             GameLogic game = new GameLogic(boardSize, player1IsComputer, player2IsComputer);
 
@@ -42,7 +46,7 @@ namespace UserInterfaceWindows
             {
                 while (this.m_Game.CurrentGameState == GameLogic.eGameState.Playing)
                 {
-                 //   this.m_Game.OneRoundInGame(this);
+                   this.m_Game.OneRoundInGame();
                 }
 
                 updateTheUserInterfaceAccordingTheState();
