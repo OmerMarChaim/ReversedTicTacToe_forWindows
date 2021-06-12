@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReverseTicTacToeGame;
 
 namespace UserInterfaceWindows
 {
@@ -22,10 +23,12 @@ namespace UserInterfaceWindows
         public static void InitGame() // Checked
         {
 
-            int boardSize; // get from Startform
-            bool player1IsComputer = false;
-            bool player2IsComputer; //get from Startform
+            int boardSize= -1; //Todo get from Startform
+            bool player1IsComputer = false; 
+            bool player2IsComputer=false; //todo get from Startform
+
             GameLogic game = new GameLogic(boardSize, player1IsComputer, player2IsComputer);
+
             GameManeger gameUi = new GameManeger(game);
 
             gameUi.startGame();
@@ -39,7 +42,7 @@ namespace UserInterfaceWindows
             {
                 while (this.m_Game.CurrentGameState == GameLogic.eGameState.Playing)
                 {
-                    this.m_Game.OneRoundInGame(this);
+                 //   this.m_Game.OneRoundInGame(this);
                 }
 
                 updateTheUserInterfaceAccordingTheState();

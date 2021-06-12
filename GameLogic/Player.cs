@@ -1,6 +1,6 @@
 namespace ReverseTicTacToeGame
 {
-    internal struct Player
+    public struct Player
     {
         private int m_NumberOfWins;
         private readonly ePlayersMark r_Sign;

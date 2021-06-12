@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using ReverseTicTacToeGame;
 
-namespace GameLogic
+namespace ReverseTicTacToeGame
 {
-    internal class Board
+    public class Board
     {
         private readonly int r_Size;
         private ePlayersMark[,] m_Board;
