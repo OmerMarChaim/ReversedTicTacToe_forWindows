@@ -47,12 +47,6 @@
     <Compile Include="StartGameForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InitGameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InitGameForm.Designer.cs">
-      <DependentUpon>InitGameForm.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GameLogic">
@@ -65,9 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="InitGameForm.resx">
-      <DependentUpon>InitGameForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="StartGameForm.resx">
       <DependentUpon>StartGameForm.cs</DependentUpon>
     </EmbeddedResource>
