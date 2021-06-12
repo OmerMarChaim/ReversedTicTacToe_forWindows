@@ -20,8 +20,8 @@ namespace UserInterfaceWindows
         private Label m_RowsLabel;
         private Label m_ColsLabel;
         private Label m_BoardSize;
-        private NumericUpDown m_Rows;
-        private NumericUpDown m_Cols;
+        private NumericUpDown m_RowsNumericUpDown;
+        private NumericUpDown m_ColsNumericUpDown;
         public StartGameForm()
         {
             this.Text = "Game Settings";
@@ -39,23 +39,36 @@ namespace UserInterfaceWindows
 
         private void setNumericUpDown()
         {
-            m_Cols = new NumericUpDown();
-            m_Cols.Maximum = 9;
-            m_Cols.Minimum = 3;
-            m_Cols.Value = 5;
-            m_Cols.Size = new Size(40, 25);
-            m_Cols.Location = new Point(100, 130);
-            m_Cols.Increment = 1;
-            this.Controls.Add(m_Cols);
+            m_ColsNumericUpDown = new NumericUpDown();
+            m_ColsNumericUpDown.Maximum = 10;
+            m_ColsNumericUpDown.Minimum = 4;
+            m_ColsNumericUpDown.Value = 5;
+            m_ColsNumericUpDown.Size = new Size(40, 25);
+            m_ColsNumericUpDown.Location = new Point(100, 130);
+            m_ColsNumericUpDown.Increment = 1;
+            m_ColsNumericUpDown.ValueChanged += m_ColsNumericUpDown_Click;
+            this.Controls.Add(m_ColsNumericUpDown);
 
-            m_Rows = new NumericUpDown();
-            m_Rows.Location = new Point(100, 160);
-            m_Rows.Maximum = 9;
-            m_Rows.Minimum = 3;
-            m_Rows.Value = 5;
-            m_Rows.Size = new Size(40, 25);
-            m_Rows.Increment = 1;
-            this.Controls.Add(m_Rows);
+            m_RowsNumericUpDown = new NumericUpDown();
+            m_RowsNumericUpDown.Location = new Point(100, 160);
+            m_RowsNumericUpDown.Maximum = 10;
+            m_RowsNumericUpDown.Minimum = 4;
+            m_RowsNumericUpDown.Value = 5;
+            m_RowsNumericUpDown.Size = new Size(40, 25);
+            m_RowsNumericUpDown.Increment = 1;
+            m_RowsNumericUpDown.ValueChanged += m_RowsNumericUpDown_Click;
+
+            this.Controls.Add(m_RowsNumericUpDown);
+        }
+
+        private void m_RowsNumericUpDown_Click(object i_Sender, EventArgs i_E)
+        {
+            m_ColsNumericUpDown.Value = m_RowsNumericUpDown.Value;
+        }
+
+        private void m_ColsNumericUpDown_Click(object i_Sender, EventArgs i_E)
+        {
+                m_RowsNumericUpDown.Value = m_ColsNumericUpDown.Value;
         }
 
         private void setLabels()
