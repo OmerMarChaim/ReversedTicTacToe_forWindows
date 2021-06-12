@@ -39,11 +39,12 @@ namespace UserInterfaceWindows
 
         private void setNumericUpDown()
         {
+            Size NumericSize= new Size(40, 25);
             m_ColsNumericUpDown = new NumericUpDown();
             m_ColsNumericUpDown.Maximum = 10;
             m_ColsNumericUpDown.Minimum = 4;
             m_ColsNumericUpDown.Value = 5;
-            m_ColsNumericUpDown.Size = new Size(40, 25);
+            m_ColsNumericUpDown.Size = NumericSize;
             m_ColsNumericUpDown.Location = new Point(100, 130);
             m_ColsNumericUpDown.Increment = 1;
             m_ColsNumericUpDown.ValueChanged += m_ColsNumericUpDown_Click;
@@ -54,7 +55,7 @@ namespace UserInterfaceWindows
             m_RowsNumericUpDown.Maximum = 10;
             m_RowsNumericUpDown.Minimum = 4;
             m_RowsNumericUpDown.Value = 5;
-            m_RowsNumericUpDown.Size = new Size(40, 25);
+            m_RowsNumericUpDown.Size = NumericSize;
             m_RowsNumericUpDown.Increment = 1;
             m_RowsNumericUpDown.ValueChanged += m_RowsNumericUpDown_Click;
 
@@ -73,21 +74,24 @@ namespace UserInterfaceWindows
 
         private void setLabels()
         {
+            Size labelSize = new Size(50, 20);
             m_Players = new Label();
             m_Players.Text = "Players:";
             m_Players.Location = new Point(10,10);
+            m_Players.Size = labelSize;
             this.Controls.Add(m_Players);
 
 
             m_Player1label = new Label();
             m_Player1label.Text = "Player 1:";
             m_Player1label.Location = new Point(20, 40);
+            m_Player1label.Size = labelSize;
             this.Controls.Add(m_Player1label);
 
 
             m_Player2label = new Label();
             m_Player2label.Text = "Player 2:";
-            m_Player2label.Size = new Size(50, 20);
+            m_Player2label.Size = labelSize;
             m_Player2label.Location = new Point(50, 70);
             this.Controls.Add(m_Player2label);
 
@@ -98,7 +102,7 @@ namespace UserInterfaceWindows
             
             m_ColsLabel=new Label();
             m_ColsLabel.Text = "Cols:";
-            m_ColsLabel.Size = new Size(50, 20);
+            m_ColsLabel.Size = labelSize;
             m_ColsLabel.Location = new Point(30, 130);
            this.Controls.Add(m_ColsLabel);
 
@@ -110,7 +114,7 @@ namespace UserInterfaceWindows
 
             m_RowsLabel = new Label();
             m_RowsLabel.Text = "Rows:";
-            m_RowsLabel.Size = new Size(50, 20);
+            m_RowsLabel.Size = labelSize;
             m_RowsLabel.Location = new Point(30, 160);
             this.Controls.Add(m_RowsLabel);
     
@@ -128,6 +132,7 @@ namespace UserInterfaceWindows
 
             m_IsComputerBox = new CheckBox();
             m_IsComputerBox.Checked = false;
+            m_IsComputerBox.Size = new Size(20, 20);
             m_IsComputerBox.Location = new Point(20, 70);
             this.Controls.Add(m_IsComputerBox);
 
