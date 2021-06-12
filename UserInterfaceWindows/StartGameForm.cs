@@ -26,8 +26,11 @@ namespace UserInterfaceWindows
         {
             this.Text = "Game Settings";
             setButtonStart();
+
             setPlayersTextBox();
+
             setLabels();
+
             setNumericUpDown();
 
             //action when start button press -> need to init game
@@ -36,7 +39,23 @@ namespace UserInterfaceWindows
 
         private void setNumericUpDown()
         {
-           // throw new NotImplementedException();
+            m_Cols = new NumericUpDown();
+            m_Cols.Maximum = 9;
+            m_Cols.Minimum = 3;
+            m_Cols.Value = 5;
+            m_Cols.Size = new Size(40, 25);
+            m_Cols.Location = new Point(100, 130);
+            m_Cols.Increment = 1;
+            this.Controls.Add(m_Cols);
+
+            m_Rows = new NumericUpDown();
+            m_Rows.Location = new Point(100, 160);
+            m_Rows.Maximum = 9;
+            m_Rows.Minimum = 3;
+            m_Rows.Value = 5;
+            m_Rows.Size = new Size(40, 25);
+            m_Rows.Increment = 1;
+            this.Controls.Add(m_Rows);
         }
 
         private void setLabels()
@@ -67,19 +86,10 @@ namespace UserInterfaceWindows
             m_ColsLabel=new Label();
             m_ColsLabel.Text = "Cols:";
             m_ColsLabel.Size = new Size(50, 20);
-
             m_ColsLabel.Location = new Point(30, 130);
            this.Controls.Add(m_ColsLabel);
 
-            m_Cols = new NumericUpDown();
-            m_Cols.Maximum = 9;
-            m_Cols.Minimum = 3;
-            m_Cols.Value = 5;
-            m_Cols.Size = new Size(40, 25);
-            m_Cols.Location = new Point(100, 130);
-            m_Cols.Increment = 1;
-            this.Controls.Add(m_Cols);
-
+        
            // this.Controls.Add(m_ColsLabel);
 
 
@@ -87,11 +97,10 @@ namespace UserInterfaceWindows
 
             m_RowsLabel = new Label();
             m_RowsLabel.Text = "Rows:";
+            m_RowsLabel.Size = new Size(50, 20);
             m_RowsLabel.Location = new Point(30, 160);
-            m_Rows = new NumericUpDown();
-            m_Rows.Location = new Point(50, 160);
             this.Controls.Add(m_RowsLabel);
-            this.Controls.Add(m_Rows);
+    
 
 
             //todo

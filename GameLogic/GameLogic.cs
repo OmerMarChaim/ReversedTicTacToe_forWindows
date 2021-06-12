@@ -59,32 +59,32 @@ namespace ReverseTicTacToeGame
             get { return m_GameBoard; }
         }
 
-        public void OneRoundInGame()
-        {
-            Player[] players = { m_Player1, m_Player2 };
-            foreach(Player player in players)
-            {
-                (int row, int column) point;
-                // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
-                if(!player.IsComputer)
-                {
-                    point = i_GameUi.GetValidPointFromUser(player.Sign); // the slot is in range and free   
-                }
-                else
-                {
-                    point = getRandomPointForComputer();
-                }
-        
-                this.GameBoard.SetValueOnBoard(point.row, point.column, player.Sign);
-                updateStateOfGame(point, player);
-               // i_GameUi.CleanAndShowBeforeNewTurn();
-        
-                if(m_CurrentGameState != eGameState.Playing)
-                {
-                    break;
-                }
-            }
-        }
+        // public void OneRoundInGame()
+        // {
+        //     Player[] players = { m_Player1, m_Player2 };
+        //     foreach(Player player in players)
+        //     {
+        //         (int row, int column) point;
+        //         // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
+        //         if(!player.IsComputer)
+        //         {
+        //             point = i_GameUi.GetValidPointFromUser(player.Sign); // the slot is in range and free   
+        //         }
+        //         else
+        //         {
+        //             point = getRandomPointForComputer();
+        //         }
+        //
+        //         this.GameBoard.SetValueOnBoard(point.row, point.column, player.Sign);
+        //         updateStateOfGame(point, player);
+        //        // i_GameUi.CleanAndShowBeforeNewTurn();
+        //
+        //         if(m_CurrentGameState != eGameState.Playing)
+        //         {
+        //             break;
+        //         }
+        //     }
+        // }
 
         private void updateStateOfGame((int row, int column) i_LastPointEntered, Player i_Player)
         {

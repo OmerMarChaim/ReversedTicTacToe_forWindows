@@ -46,7 +46,7 @@ namespace UserInterfaceWindows
             {
                 while (this.m_Game.CurrentGameState == GameLogic.eGameState.Playing)
                 {
-                   this.m_Game.OneRoundInGame();
+                 //  this.m_Game.OneRoundInGame();
                 }
 
                 updateTheUserInterfaceAccordingTheState();
