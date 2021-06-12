@@ -4,10 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReverseTicTacToeGame;
-
+using UserInterfaceWindows;
+using System.Windows.Forms;
+using System.Drawing;
 namespace UserInterfaceWindows
+
+
 {
-    class GameManeger
+   internal class GameManeger
     {
         private const char k_Circle = 'O';
         private const char k_Cross = 'X';
@@ -15,26 +19,31 @@ namespace UserInterfaceWindows
         private const char k_Player1Sign = k_Cross;
         private const char k_Player2Sign = k_Circle;
         private GameLogic m_Game;
+        private static StartGameForm m_SettingsForm;
         internal GameManeger(GameLogic i_Game)
         {
             m_Game = i_Game;
+            m_SettingsForm = new StartGameForm();
+
+            m_SettingsForm.ShowDialog();
         }
 
-        public static void InitGame() // Checked
+       
+        public static void InitGame(string i_Player1Name, bool i_Player2IsComputer, string i_Player2Name, int i_Size) // Checked
         {
-            //get Object from StartGameForm
-            int boardSize= -1;
-            //Todo get from Startform
-            string player1Name = "";
-            string player2Name = "";
+           
+            int boardSize=i_Size;
+           
+            string player1Name =i_Player1Name;
+            string player2Name = i_Player2Name;
             bool player1IsComputer = false; 
-            bool player2IsComputer=false; 
-            //todo get from Startform
+            bool player2IsComputer= i_Player2IsComputer; 
 
             GameLogic game = new GameLogic(boardSize, player1IsComputer, player2IsComputer);
 
             GameManeger gameUi = new GameManeger(game);
 
+            m_SettingsForm.Hide();
             gameUi.startGame();
 
         }

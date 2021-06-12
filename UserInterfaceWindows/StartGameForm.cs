@@ -162,8 +162,14 @@ namespace UserInterfaceWindows
             m_ButtonStart = new Button();
             m_ButtonStart.Text = "Let's Start";
             m_ButtonStart.Location = new Point(100, 200);
+            m_ButtonStart.Click += m_ButtonStart_Click;
             this.Controls.Add(m_ButtonStart);
 
+        }
+
+        private void m_ButtonStart_Click(object i_Sender, EventArgs i_E)
+        {
+            GameManeger.InitGame(m_Player1Name.Text,m_IsComputerBox.Checked,m_Player2Name.Text,(int )m_ColsNumericUpDown.Value); 
         }
 
         private void InitializeComponent()
