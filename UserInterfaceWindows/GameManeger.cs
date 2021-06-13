@@ -34,7 +34,7 @@ namespace UserInterfaceWindows
             m_Game = new GameLogic(m_BoardSize, false, m_Player2IsComputer);
             m_Player1Name = m_SettingsForm.Player1Name;
             m_Player2Name = m_SettingsForm.Player2Name;
-            this.initGameForm();
+            this.startGame();
         }
 
         private void initGameForm()
@@ -44,6 +44,9 @@ namespace UserInterfaceWindows
 
         private void startGame()
         {
+            GameBoardForm gameBoardForm = new GameBoardForm(m_BoardSize);
+            gameBoardForm.ShowDialog();
+
         }
 
         // private void startGame() // Checked
