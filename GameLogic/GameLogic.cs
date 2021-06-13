@@ -61,7 +61,7 @@ namespace ReverseTicTacToeGame
 
         // public void OneRoundInGame()
         // {
-        //     Player[] players = { m_Player1, m_Player2 };
+        //    Player[] players = { m_Player1, m_Player2 };
         //     foreach(Player player in players)
         //     {
         //         (int row, int column) point;

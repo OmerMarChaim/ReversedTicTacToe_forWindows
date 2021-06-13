@@ -35,23 +35,46 @@ namespace UserInterfaceWindows
             {
                 for (int j = 0; j < m_Size; j++)
                 {
-                    ButtonsTable[i, j] = new Button();
-                    Button newButton = ButtonsTable[i, j] as Button;
-                    newButton.Size = new Size(50, 50);
-                    newButton.Left = wantedLeft;
-                    newButton.Top = wantedTop;
-                    newButton.Click += newButton_Click;
-                    this.Controls.Add(newButton);
+                    Button newButton = initNewButton(wantedLeft, wantedTop);
+                       // ButtonsTable[i, j] as Button;
+                    
                     wantedLeft = newButton.Left + 55;
+                    ButtonsTable[i, j] = newButton;
+
                 }
                 wantedTop = ButtonsTable[i, 0].Bottom + 5;
                 wantedLeft = 5;
             }
         }
 
+        private Button initNewButton(int i_WantedLeft, int i_WantedTop)
+        {
+            Button newButton = new Button();
+            newButton.Size = new Size(50, 50);
+            newButton.Left = i_WantedLeft;
+            newButton.Top = i_WantedTop;
+            newButton.Click += newButton_Click;
+            this.Controls.Add(newButton);
+            return newButton;
+        }
+
+     
+
         private void newButton_Click(object i_Sender, EventArgs i_E)
         {
-          
+            for(int i = 0; i < m_Size; i++)
+            {
+                for(int j = 0; j < m_Size ; j++)
+                {
+                    if (ButtonsTable[i,j] as Button == (i_Sender as Button))
+                    {
+                        GameManeger.validPointFromUser(i,j)
+                    }
+                }
+            }
+            
+            
+            
         }
 
         private void InitializeComponent()

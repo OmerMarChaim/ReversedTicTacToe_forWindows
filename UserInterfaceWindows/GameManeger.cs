@@ -92,5 +92,10 @@ namespace UserInterfaceWindows
         {
             // Console.WriteLine($"You Quit from the Game! The winner in this round is : {i_SignOfTheWinner}");
         }
+
+        public static void validPointFromUser(int i_I, int i_j)
+        {
+         
+        }
     }
 }
