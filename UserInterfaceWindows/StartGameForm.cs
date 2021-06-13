@@ -77,20 +77,20 @@ namespace UserInterfaceWindows
             this.m_ButtonStart.Size = new System.Drawing.Size(200, 23);
             this.m_ButtonStart.TabIndex = 0;
             this.m_ButtonStart.Text = "Let\'s Start";
-            this.m_ButtonStart.Click += new System.EventHandler(this.m_ButtonStart_Click);
+            this.m_ButtonStart.Click += this.m_ButtonStart_Click;
             // 
             // m_Player1Name
             // 
-            this.m_Player1Name.Location = new System.Drawing.Point(120, 40);
+            this.m_Player1Name.Location = new Point(120, 40);
             this.m_Player1Name.Name = "m_Player1Name";
-            this.m_Player1Name.Size = new System.Drawing.Size(100, 20);
+            this.m_Player1Name.Size = new Size(100, 20);
             this.m_Player1Name.TabIndex = 1;
             // 
             // m_IsComputerBox
             // 
-            this.m_IsComputerBox.Location = new System.Drawing.Point(20, 67);
+            this.m_IsComputerBox.Location = new Point(20, 67);
             this.m_IsComputerBox.Name = "m_IsComputerBox";
-            this.m_IsComputerBox.Size = new System.Drawing.Size(20, 20);
+            this.m_IsComputerBox.Size = new Size(20, 20);
             this.m_IsComputerBox.TabIndex = 2;
             this.m_IsComputerBox.CheckedChanged += new System.EventHandler(this.m_IsComputerBox_CheckedChanged);
             // 
@@ -223,8 +223,17 @@ namespace UserInterfaceWindows
 
         private void m_ButtonStart_Click(object sender, EventArgs e)
         {
-
-            this.Close();
+            bool isEmptyNameOfPlayer1 = m_Player1Name.Text == "";
+            bool isEmptyNameOfPlayer2 = m_Player1Name.Text == "";
+            if(isEmptyNameOfPlayer1 || isEmptyNameOfPlayer2)
+            {
+                MessageBox.Show("Empty Name field! You have to insert player name");
+            }
+            else
+            { 
+                this.Close(); 
+            }
+            
         }
     }
 }

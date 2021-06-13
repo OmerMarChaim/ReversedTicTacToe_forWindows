@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using ReverseTicTacToeGame;
+
 //using UserInterfaceForWindows.u
 namespace ReverseTicTacToeGame
 {
@@ -14,6 +14,7 @@ namespace ReverseTicTacToeGame
         private const int k_MinBoardSize = 3;
         private const int k_MaxBoardSize = 9;
         private Random m_Random;
+        private Player m_currentPlayer;
 
         public enum eGameState
         {
@@ -29,7 +30,7 @@ namespace ReverseTicTacToeGame
             m_Player1 = new Player(ePlayersMark.Player1, i_Player1IsComputer);
             m_Player2 = new Player(ePlayersMark.Player2, i_Player2IsComputer);
             m_CurrentGameState = eGameState.Playing;
-            m_Random = new Random();
+            m_currentPlayer = m_Player1;
         }
 
         public eGameState CurrentGameState
@@ -59,32 +60,26 @@ namespace ReverseTicTacToeGame
             get { return m_GameBoard; }
         }
 
-        // public void OneRoundInGame()
-        // {
-        //     Player[] players = { m_Player1, m_Player2 };
-        //     foreach(Player player in players)
-        //     {
-        //         (int row, int column) point;
-        //         // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
-        //         if(!player.IsComputer)
-        //         {
-        //             point = i_GameUi.GetValidPointFromUser(player.Sign); // the slot is in range and free   
-        //         }
-        //         else
-        //         {
-        //             point = getRandomPointForComputer();
-        //         }
-        //
-        //         this.GameBoard.SetValueOnBoard(point.row, point.column, player.Sign);
-        //         updateStateOfGame(point, player);
-        //        // i_GameUi.CleanAndShowBeforeNewTurn();
-        //
-        //         if(m_CurrentGameState != eGameState.Playing)
-        //         {
-        //             break;
-        //         }
-        //     }
-        // }
+        public void OneRoundInGame((int row, int column) i_Point)
+        {
+            for(int i = 0; i < 2; i++)
+            {
+                // i_Point = i_GameUi.GetValidPointFromUser(player.Sign); // the slot is in range and free   
+                if(m_currentPlayer.IsComputer)
+                {
+                    i_Point = getRandomPointForComputer();
+                }
+
+                this.GameBoard.SetValueOnBoard(i_Point.row, i_Point.column, m_currentPlayer.Sign);
+                updateStateOfGame(i_Point, m_currentPlayer);
+                // i_GameUi.CleanAndShowBeforeNewTurn();
+                m_currentPlayer = m_currentPlayer.Equals(m_Player1) ? m_Player2 : m_Player1;
+                if(m_CurrentGameState != eGameState.Playing || !m_currentPlayer.IsComputer)
+                {
+                    break;
+                }
+            }
+        }
 
         private void updateStateOfGame((int row, int column) i_LastPointEntered, Player i_Player)
         {
@@ -192,7 +187,10 @@ namespace ReverseTicTacToeGame
             return counter == i_NumberOfSignsToWin;
         }
 
-        private bool checkWinInRowAndColumn((int row, int column) i_Point, ePlayersMark i_PlayerMark, int i_NumberOfSignsToWin)
+        private bool checkWinInRowAndColumn(
+            (int row, int column) i_Point,
+            ePlayersMark i_PlayerMark,
+            int i_NumberOfSignsToWin)
         {
             int counterRow = 0;
             int counterColumn = 0;
