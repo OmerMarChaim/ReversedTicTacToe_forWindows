@@ -59,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GameBoardForm.resx">
+      <DependentUpon>GameBoardForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StartGameForm.resx">
       <DependentUpon>StartGameForm.cs</DependentUpon>
     </EmbeddedResource>
