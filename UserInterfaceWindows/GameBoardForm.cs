@@ -40,12 +40,18 @@ namespace UserInterfaceWindows
                     newButton.Size = new Size(50, 50);
                     newButton.Left = wantedLeft;
                     newButton.Top = wantedTop;
+                    newButton.Click += newButton_Click;
                     this.Controls.Add(newButton);
                     wantedLeft = newButton.Left + 55;
                 }
                 wantedTop = ButtonsTable[i, 0].Bottom + 5;
                 wantedLeft = 5;
             }
+        }
+
+        private void newButton_Click(object i_Sender, EventArgs i_E)
+        {
+          
         }
 
         private void InitializeComponent()
