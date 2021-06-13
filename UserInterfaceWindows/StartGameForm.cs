@@ -108,8 +108,8 @@ namespace UserInterfaceWindows
             // m_RowsNumericUpDown
             // 
             this.m_RowsNumericUpDown.Location = new System.Drawing.Point(163, 126);
-            this.m_RowsNumericUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
-            this.m_RowsNumericUpDown.Minimum = new decimal(new int[] { 4, 0, 0, 0 });
+            this.m_RowsNumericUpDown.Maximum = new decimal(new int[] { 9, 0, 0, 0 });
+            this.m_RowsNumericUpDown.Minimum = new decimal(new int[] { 3, 0, 0, 0 });
             this.m_RowsNumericUpDown.Name = "m_RowsNumericUpDown";
             this.m_RowsNumericUpDown.Size = new System.Drawing.Size(31, 20);
             this.m_RowsNumericUpDown.TabIndex = 4;

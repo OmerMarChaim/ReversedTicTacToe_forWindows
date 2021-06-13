@@ -40,7 +40,6 @@ namespace UserInterfaceWindows
         private void initGameForm()
         {
             
-            this.startGame();
         }
 
         private void startGame()
