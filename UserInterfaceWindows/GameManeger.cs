@@ -30,10 +30,10 @@ namespace UserInterfaceWindows
             this.startGame();
         }
 
-        private void initGameForm()
-        {
-            
-        }
+        // private void initGameForm()
+        // {
+        //     
+        // }
 
         private void startGame()
         {
@@ -86,9 +86,9 @@ namespace UserInterfaceWindows
             // Console.WriteLine($"You Quit from the Game! The winner in this round is : {i_SignOfTheWinner}");
         }
 
-        public static void validPointFromUser(int i_I, int i_j)
+        public static void ValidPointFromUser((int row, int col) i_Point)
         {
-         
+            m_Game.OneRoundInGame(i_Point);
         }
     }
 }

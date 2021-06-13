@@ -68,13 +68,11 @@ namespace UserInterfaceWindows
                 {
                     if (ButtonsTable[i,j] as Button == (i_Sender as Button))
                     {
-                        GameManeger.validPointFromUser(i,j)
+                        (int row, int col) newPoint = (i, j);
+                        GameManeger.ValidPointFromUser(newPoint);
                     }
                 }
             }
-            
-            
-            
         }
 
         private void InitializeComponent()
@@ -107,7 +105,10 @@ namespace UserInterfaceWindows
 
         }
 
-       
+        public static void GetPointOfButton(object i_Sender)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     
