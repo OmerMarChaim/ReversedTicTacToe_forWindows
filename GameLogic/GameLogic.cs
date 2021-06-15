@@ -11,8 +11,8 @@ namespace ReverseTicTacToeGame
         private Player m_Player2;
         private eGameState m_CurrentGameState;
         private Player m_WinnerPlayer;
-        private const int k_MinBoardSize = 3;
-        private const int k_MaxBoardSize = 9;
+        private const int k_MinBoardSize = 4;
+        private const int k_MaxBoardSize = 10;
         private Random m_Random;
         private Player m_currentPlayer;
 
