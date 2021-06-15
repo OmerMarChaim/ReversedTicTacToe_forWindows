@@ -94,5 +94,15 @@ namespace UserInterfaceWindows
         {
             m_Game.OneRoundInGame(i_Point);
         }
+
+        public static int getValidMaxSizeOfBoard()
+        {
+            return GameLogic.MaxBoardSize;
+        }
+        
+        public static int getValidMinSizeOfBoard()
+        {
+            return GameLogic.MinBoardSize;
+        }
     }
 }

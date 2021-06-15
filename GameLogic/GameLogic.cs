@@ -59,6 +59,15 @@ namespace ReverseTicTacToeGame
         {
             get { return m_GameBoard; }
         }
+        public static int MaxBoardSize
+        {
+            get { return k_MaxBoardSize; }
+        }
+        public static int MinBoardSize
+        {
+            get { return k_MinBoardSize; }
+        }
+
 
         public void OneRoundInGame((int row, int column) i_Point)
         {

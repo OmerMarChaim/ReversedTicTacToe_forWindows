@@ -22,7 +22,8 @@ namespace UserInterfaceWindows
         private Label m_BoardSize;
         private NumericUpDown m_RowsNumericUpDown;
         private NumericUpDown m_ColsNumericUpDown;
-
+        private int m_MaxSizeOfBoard=0;
+        private int m_MinSizeOfBoard=0;
         public string Player1Name
         {
             get { return m_Player1Name.Text; }
@@ -45,6 +46,9 @@ namespace UserInterfaceWindows
         public StartGameForm()
         {
             this.Text = "Game Settings";
+           m_MaxSizeOfBoard= GameManeger.getValidMaxSizeOfBoard();
+           m_MinSizeOfBoard = GameManeger.getValidMinSizeOfBoard();
+
             InitializeComponent();
 
             //action when start button press -> need to init game
@@ -97,12 +101,8 @@ namespace UserInterfaceWindows
             // m_ColsNumericUpDown
             // 
             this.m_ColsNumericUpDown.Location = new System.Drawing.Point(71, 126);
-            this.m_ColsNumericUpDown.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.m_ColsNumericUpDown.Minimum = 3;
+            this.m_ColsNumericUpDown.Maximum = m_MaxSizeOfBoard;
+            this.m_ColsNumericUpDown.Minimum = m_MinSizeOfBoard;
             this.m_ColsNumericUpDown.Name = "m_ColsNumericUpDown";
             this.m_ColsNumericUpDown.Size = new System.Drawing.Size(40, 20);
             this.m_ColsNumericUpDown.TabIndex = 3;
@@ -112,8 +112,8 @@ namespace UserInterfaceWindows
             // m_RowsNumericUpDown
             // 
             this.m_RowsNumericUpDown.Location = new System.Drawing.Point(163, 126);
-            this.m_RowsNumericUpDown.Maximum = 9;
-            this.m_RowsNumericUpDown.Minimum = 3;
+            this.m_RowsNumericUpDown.Maximum = m_MaxSizeOfBoard;
+            this.m_RowsNumericUpDown.Minimum = m_MinSizeOfBoard;
             this.m_RowsNumericUpDown.Name = "m_RowsNumericUpDown";
             this.m_RowsNumericUpDown.Size = new System.Drawing.Size(40, 20);
             this.m_RowsNumericUpDown.TabIndex = 4;
