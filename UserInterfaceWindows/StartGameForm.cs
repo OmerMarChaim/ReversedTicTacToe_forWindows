@@ -213,7 +213,8 @@ namespace UserInterfaceWindows
 
         private void m_IsComputerBox_CheckedChanged(object sender, EventArgs e)
         {
-            m_IsComputerBox.Checked = !m_IsComputerBox.Checked;
+          
+
             m_Player2Name.Enabled = !m_Player2Name.Enabled;
             if(m_Player2Name.Enabled == false)
             {
@@ -230,8 +231,8 @@ namespace UserInterfaceWindows
                 MessageBox.Show("Empty Name field! You have to insert player name");
             }
             else
-            { 
-                this.Close(); 
+            {
+                new GameManeger(this);
             }
             
         }

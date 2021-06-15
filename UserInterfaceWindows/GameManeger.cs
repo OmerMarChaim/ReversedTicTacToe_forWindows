@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using ReverseTicTacToeGame;
 
 namespace UserInterfaceWindows
@@ -23,10 +24,12 @@ namespace UserInterfaceWindows
         {
             m_SettingsForm = i_SettingsForm;
             m_BoardSize  = (int)m_SettingsForm.NumberOfColsAndRows;
-            m_Player2IsComputer = m_SettingsForm.IsComputerBox;
+            m_Player2IsComputer = !m_SettingsForm.IsComputerBox;
             m_Game = new GameLogic(m_BoardSize, false, m_Player2IsComputer);
             m_Player1Name = m_SettingsForm.Player1Name;
             m_Player2Name = m_SettingsForm.Player2Name;
+            i_SettingsForm.Close();
+            
             this.startGame();
         }
 
@@ -37,7 +40,7 @@ namespace UserInterfaceWindows
 
         private void startGame()
         {
-            GameBoardForm gameBoardForm = new GameBoardForm(m_BoardSize);
+            GameBoardForm gameBoardForm = new GameBoardForm(m_BoardSize ,this);
             gameBoardForm.ShowDialog();
 
         }
@@ -73,7 +76,8 @@ namespace UserInterfaceWindows
 
         private static void tieMessage() // Checked
         {
-            // Console.WriteLine("No one is going to win this game, there's a tie! This game is over without winner.");
+           // MessageBox.Show("No one is going to win this game, there's a tie! This game is over without winner.");
+
         }
 
         private static void winMessage(ePlayersMark i_SignOfTheWinner)
@@ -86,7 +90,7 @@ namespace UserInterfaceWindows
             // Console.WriteLine($"You Quit from the Game! The winner in this round is : {i_SignOfTheWinner}");
         }
 
-        public static void ValidPointFromUser((int row, int col) i_Point)
+        public void ValidPointFromUser((int row, int col) i_Point)
         {
             m_Game.OneRoundInGame(i_Point);
         }

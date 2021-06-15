@@ -15,13 +15,14 @@ namespace UserInterfaceWindows
         private const char k_Cross = 'X';
         private Label labelPlyer1;
         private Label labelPlyer2;
-        private readonly Button[,] ButtonsTable;
+        private readonly Button[,] m_ButtonsTable;
+        private GameManeger m_GameManeger;
 
-        public GameBoardForm(int i_Size)
+        public GameBoardForm(int i_Size, GameManeger i_GameManeger)
         {
             m_Size = i_Size;
-            ButtonsTable = new Button[m_Size, m_Size];
-            
+            m_ButtonsTable = new Button[m_Size, m_Size];
+            m_GameManeger = i_GameManeger;
             initButtonsTableButton();
             this.AutoSize = true;
             InitializeComponent();
@@ -39,10 +40,10 @@ namespace UserInterfaceWindows
                        // ButtonsTable[i, j] as Button;
                     
                     wantedLeft = newButton.Left + 55;
-                    ButtonsTable[i, j] = newButton;
+                    m_ButtonsTable[i, j] = newButton;
 
                 }
-                wantedTop = ButtonsTable[i, 0].Bottom + 5;
+                wantedTop = m_ButtonsTable[i, 0].Bottom + 5;
                 wantedLeft = 5;
             }
         }
@@ -66,10 +67,15 @@ namespace UserInterfaceWindows
             {
                 for(int j = 0; j < m_Size ; j++)
                 {
-                    if (ButtonsTable[i,j] as Button == (i_Sender as Button))
+                    if (m_ButtonsTable[i,j] as Button == (i_Sender as Button))
                     {
                         (int row, int col) newPoint = (i, j);
-                        GameManeger.ValidPointFromUser(newPoint);
+                        m_GameManeger.ValidPointFromUser(newPoint);
+                        //todo
+                        //just chack if work it doesnt work with computer player.
+                        Button spesificButton = (m_ButtonsTable[i, j] as Button);
+                        spesificButton.Enabled = false;
+                        spesificButton.Text = "X";
                     }
                 }
             }
