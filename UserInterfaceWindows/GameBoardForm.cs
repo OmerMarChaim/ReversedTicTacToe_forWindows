@@ -52,6 +52,8 @@ namespace UserInterfaceWindows
         //    this.Controls.Add(labelPlyer2);
 
             this.AutoSize = true;
+            this.Name = "GameBoardForm";
+            this.StartPosition = FormStartPosition.CenterScreen;
 
         }
 
@@ -113,7 +115,7 @@ namespace UserInterfaceWindows
             this.ClientSize = new System.Drawing.Size(369, 297);
             this.Controls.Add(this.labelPlyer2);
             this.Controls.Add(this.labelPlyer1);
-            this.Name = "GameBoardForm";
+        
             this.ResumeLayout(false);
 
         }
@@ -142,7 +144,7 @@ namespace UserInterfaceWindows
         public void showQuitMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
         {
             MessageBox.Show($@"You Quit from the Game! The winner in this round is : {i_WinnerName} ! Who play with {(Char)i_SignOfTheWinner}
-See YOU next Semester");
+See YOU next Time");
         this.Close();
         }
 
