@@ -80,6 +80,7 @@ namespace ReverseTicTacToeGame
                 }
 
                 this.GameBoard.SetValueOnBoard(i_Point.row, i_Point.column, m_currentPlayer.Sign);
+                
                 updateStateOfGame(i_Point, m_currentPlayer);
                 // i_GameUi.CleanAndShowBeforeNewTurn();
                 m_currentPlayer = m_currentPlayer.Equals(m_Player1) ? m_Player2 : m_Player1;
