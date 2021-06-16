@@ -15,6 +15,7 @@ namespace ReverseTicTacToeGame
         private const int k_MaxBoardSize = 10;
         private Random m_Random;
         private Player m_currentPlayer;
+        public event Action<(int row, int column), ePlayersMark> m_1ReportNewPointDelegates;
 
         public enum eGameState
         {
@@ -31,7 +32,15 @@ namespace ReverseTicTacToeGame
             m_Player2 = new Player(ePlayersMark.Player2, i_Player2IsComputer);
             m_CurrentGameState = eGameState.Playing;
             m_currentPlayer = m_Player1;
+            m_GameBoard.m_ReportNewPointDelegates += this.reportNewPoint;
         }
+
+        private void reportNewPoint((int row, int column) i_Arg1, ePlayersMark i_Arg2)
+        {
+           m_1ReportNewPointDelegates.Invoke(i_Arg1,i_Arg2);
+        }
+
+    
 
         public eGameState CurrentGameState
         {
@@ -80,8 +89,9 @@ namespace ReverseTicTacToeGame
                 }
 
                 this.GameBoard.SetValueOnBoard(i_Point.row, i_Point.column, m_currentPlayer.Sign);
-                
+               
                 updateStateOfGame(i_Point, m_currentPlayer);
+                //Report to Form
                 // i_GameUi.CleanAndShowBeforeNewTurn();
                 m_currentPlayer = m_currentPlayer.Equals(m_Player1) ? m_Player2 : m_Player1;
                 if(m_CurrentGameState != eGameState.Playing || !m_currentPlayer.IsComputer)

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ReverseTicTacToeGame;
 
 namespace UserInterfaceWindows
 {
@@ -37,7 +38,7 @@ namespace UserInterfaceWindows
                 for (int j = 0; j < m_Size; j++)
                 {
                     Button newButton = initNewButton(wantedLeft, wantedTop);
-                       // ButtonsTable[i, j] as Button;
+                  
                     
                     wantedLeft = newButton.Left + 55;
                     m_ButtonsTable[i, j] = newButton;
@@ -73,9 +74,8 @@ namespace UserInterfaceWindows
                         m_GameManeger.ValidPointFromUser(newPoint);
                         //todo
                         //just chack if work it doesnt work with computer player.
-                        Button spesificButton = (m_ButtonsTable[i, j] as Button);
-                        spesificButton.Enabled = false;
-                        spesificButton.Text = "X";
+                     
+                     
                     }
                 }
             }
@@ -114,6 +114,32 @@ namespace UserInterfaceWindows
         public static void GetPointOfButton(object i_Sender)
         {
             throw new NotImplementedException();
+        }
+
+        public void setPoint((int row, int column) i_Arg1, ePlayersMark i_Arg2)
+        {
+            String symbolText = i_Arg2 == ePlayersMark.Player1 ? "X" : "O";
+            (m_ButtonsTable[i_Arg1.row, i_Arg1.column] as Button).Text = symbolText;
+            (m_ButtonsTable[i_Arg1.row, i_Arg1.column] as Button).Enabled = false;
+        }
+
+        public void showTieMessage()
+        {
+             MessageBox.Show("No one is going to win this game, there's a tie! This game is over without winner.");
+        }
+
+        public void showWinMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
+        {
+       
+
+
+        }
+
+        public void showQuitMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
+        {
+            MessageBox.Show($@"You Quit from the Game! The winner in this round is : {i_WinnerName} ! Who play with {i_SignOfTheWinner}
+See YOU next Semester");
+        this.Close();
         }
     }
 

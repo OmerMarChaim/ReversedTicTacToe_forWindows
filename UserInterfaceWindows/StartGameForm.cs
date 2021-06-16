@@ -22,8 +22,8 @@ namespace UserInterfaceWindows
         private Label m_BoardSize;
         private NumericUpDown m_RowsNumericUpDown;
         private NumericUpDown m_ColsNumericUpDown;
-        private int m_MaxSizeOfBoard=0;
-        private int m_MinSizeOfBoard=0;
+        private int m_MaxSizeOfBoard;
+        private int m_MinSizeOfBoard;
         public string Player1Name
         {
             get { return m_Player1Name.Text; }
@@ -46,6 +46,7 @@ namespace UserInterfaceWindows
         public StartGameForm()
         {
             this.Text = "Game Settings";
+            
            m_MaxSizeOfBoard= GameManeger.getValidMaxSizeOfBoard();
            m_MinSizeOfBoard = GameManeger.getValidMinSizeOfBoard();
 
@@ -232,9 +233,15 @@ namespace UserInterfaceWindows
             }
             else
             {
+                this.Close();
                 new GameManeger(this);
             }
             
+        }
+
+        public void CloseWindow()
+        {
+            this.Close();
         }
     }
 }

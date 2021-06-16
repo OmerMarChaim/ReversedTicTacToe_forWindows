@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ReverseTicTacToeGame;
 
 namespace ReverseTicTacToeGame
 {
     public class Board
     {
+        public event Action<(int row, int column), ePlayersMark> m_ReportNewPointDelegates;
+
         private readonly int r_Size;
         private ePlayersMark[,] m_Board;
 
@@ -16,9 +19,9 @@ namespace ReverseTicTacToeGame
             r_Size = i_Size;
             m_Board = new ePlayersMark[i_Size, i_Size];
             m_FreeSpots = new HashSet<(int, int)>();
-            for(int i = 1; i < i_Size; i++)
+            for(int i = 0; i < i_Size; i++)
             {
-                for(int j = 1; j < i_Size; j++)
+                for(int j = 0; j < i_Size; j++)
                 {
                     m_FreeSpots.Add((i, j));
                     m_Board[i, j] = ePlayersMark.Empty;
@@ -26,7 +29,9 @@ namespace ReverseTicTacToeGame
             }
         }
 
-        public int Size
+
+    
+    public int Size
         {
             get { return r_Size; }
         }
@@ -46,8 +51,18 @@ namespace ReverseTicTacToeGame
             {
                 m_Board[i_Row, i_Column] = i_Symbol;
                 m_FreeSpots.Remove((i_Row, i_Column));
+                notifyNewPointLisner((i_Row, i_Column), i_Symbol);
             }
         }
+
+        private void notifyNewPointLisner((int, int) i_NewPoint, ePlayersMark i_Symbol)
+        {
+            if(m_ReportNewPointDelegates != null)
+            {
+                m_ReportNewPointDelegates.Invoke(i_NewPoint,i_Symbol);
+            }
+        }
+
 
         internal bool IsEmptySpot(int i_Row, int i_Column)
         {

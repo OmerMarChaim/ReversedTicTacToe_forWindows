@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ReverseTicTacToeGame;
+using static ReverseTicTacToeGame.GameLogic.eGameState;
 
 namespace UserInterfaceWindows
 
@@ -19,6 +20,7 @@ namespace UserInterfaceWindows
         private bool m_Player2IsComputer;
         private GameLogic m_Game;
         private StartGameForm m_SettingsForm;
+        private GameBoardForm m_gameBoardForm;
 
         internal GameManeger(StartGameForm i_SettingsForm)
         {
@@ -28,20 +30,21 @@ namespace UserInterfaceWindows
             m_Game = new GameLogic(m_BoardSize, false, m_Player2IsComputer);
             m_Player1Name = m_SettingsForm.Player1Name;
             m_Player2Name = m_SettingsForm.Player2Name;
-            i_SettingsForm.Close();
-            
-            this.startGame();
+            m_Game.m_1ReportNewPointDelegates += this.reportNewPoint;
+            this.InitGameBoardForm();
         }
 
-        // private void initGameForm()
-        // {
-        //     
-        // }
-
-        private void startGame()
+        private void reportNewPoint((int row, int column) i_Arg1, ePlayersMark i_Arg2)
         {
-            GameBoardForm gameBoardForm = new GameBoardForm(m_BoardSize ,this);
-            gameBoardForm.ShowDialog();
+            m_gameBoardForm.setPoint(i_Arg1, i_Arg2);
+
+        }
+
+     
+        private void InitGameBoardForm()
+        {
+            m_gameBoardForm = new GameBoardForm(m_BoardSize ,this);
+           m_gameBoardForm.ShowDialog();
 
         }
 
@@ -71,28 +74,53 @@ namespace UserInterfaceWindows
 
         private void updateTheUserInterfaceAccordingTheState()
         {
-            throw new NotImplementedException();
+            GameLogic.eGameState currentState = this.m_Game.CurrentGameState;
+            ePlayersMark signOfTheWinner = this.m_Game.WinnerPlayer.Sign;
+            String winnerName = signOfTheWinner == ePlayersMark.Player1 ? m_Player1Name : m_Player2Name;
+
+
+            if (currentState.Equals(Win))
+            {
+                winMessage(signOfTheWinner,winnerName);
+            }
+            else if (currentState == Tie)
+            {
+                tieMessage();
+            }
+            else if (currentState == Quit)
+            {
+                quitMessage(signOfTheWinner, winnerName);
+            }
+
         }
 
-        private static void tieMessage() // Checked
+        private void tieMessage() // Checked
         {
-           // MessageBox.Show("No one is going to win this game, there's a tie! This game is over without winner.");
+            m_gameBoardForm.showTieMessage();
 
         }
 
-        private static void winMessage(ePlayersMark i_SignOfTheWinner)
+        private void winMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
         {
-            // Console.WriteLine($"Well done! The winner in this round is : {i_SignOfTheWinner}");
+            m_gameBoardForm.showWinMessage(i_SignOfTheWinner, i_WinnerName);
+
         }
 
-        private static void quitMessage(ePlayersMark i_SignOfTheWinner)
+        private void quitMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
         {
-            // Console.WriteLine($"You Quit from the Game! The winner in this round is : {i_SignOfTheWinner}");
+            m_gameBoardForm.showQuitMessage(i_SignOfTheWinner, i_WinnerName);
+
         }
 
         public void ValidPointFromUser((int row, int col) i_Point)
         {
             m_Game.OneRoundInGame(i_Point);
+            if(this.m_Game.CurrentGameState != GameLogic.eGameState.Playing)
+            {
+                updateTheUserInterfaceAccordingTheState();
+
+            }
+            
         }
 
         public static int getValidMaxSizeOfBoard()
@@ -104,5 +132,7 @@ namespace UserInterfaceWindows
         {
             return GameLogic.MinBoardSize;
         }
+
+
     }
 }
