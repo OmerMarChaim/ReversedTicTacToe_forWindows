@@ -30,7 +30,6 @@ namespace UserInterfaceWindows
             m_Game = new GameLogic(m_BoardSize, false, m_Player2IsComputer);
             m_Player1Name = m_SettingsForm.Player1Name;
             m_Player2Name = m_SettingsForm.Player2Name;
-            m_Game.m_1ReportNewPointDelegates += this.reportNewPoint;
             this.InitGameBoardForm();
         }
 
@@ -53,7 +52,9 @@ namespace UserInterfaceWindows
         private void InitGameBoardForm()
         {
             m_gameBoardForm = new GameBoardForm(m_BoardSize ,this);
-           m_gameBoardForm.ShowDialog();
+            m_Game.GameBoard.m_ReportNewPointDelegates += this.reportNewPoint;
+
+            m_gameBoardForm.ShowDialog();
 
         }
 
