@@ -42,7 +42,7 @@
     <Compile Include="GameBoardForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GameManeger.cs" />
+    <Compile Include="GameManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="StartGameForm.cs">
       <SubType>Form</SubType>

@@ -6,7 +6,7 @@ using static ReverseTicTacToeGame.GameLogic.eGameState;
 namespace UserInterfaceWindows
 
 {
-    internal class GameManeger
+    internal class GameManager
     {
         private const char k_Circle = 'O';
         private const char k_Cross = 'X';
@@ -22,7 +22,7 @@ namespace UserInterfaceWindows
         private StartGameForm m_SettingsForm;
         private GameBoardForm m_gameBoardForm;
 
-        internal GameManeger(StartGameForm i_SettingsForm)
+        internal GameManager(StartGameForm i_SettingsForm)
         {
             m_SettingsForm = i_SettingsForm;
             m_BoardSize  = (int)m_SettingsForm.NumberOfColsAndRows;
@@ -32,6 +32,15 @@ namespace UserInterfaceWindows
             m_Player2Name = m_SettingsForm.Player2Name;
             m_Game.m_1ReportNewPointDelegates += this.reportNewPoint;
             this.InitGameBoardForm();
+        }
+
+        public String Player1Name
+        {
+            get { return m_Player1Name; }
+        }
+        public String Player2Name
+        {
+            get { return m_Player2Name; }
         }
 
         private void reportNewPoint((int row, int column) i_Arg1, ePlayersMark i_Arg2)
@@ -125,6 +134,14 @@ namespace UserInterfaceWindows
             
         }
 
+        public int getNumberOfWinPlayer1()
+        {
+            return m_Game.Player1.NumberOfWins;
+        }
+        public int getNumberOfWinPlayer2()
+        {
+            return m_Game.Player2.NumberOfWins;
+        }
         public static int getValidMaxSizeOfBoard()
         {
             return GameLogic.MaxBoardSize;

@@ -17,16 +17,38 @@ namespace UserInterfaceWindows
         private Label labelPlyer1;
         private Label labelPlyer2;
         private readonly Button[,] m_ButtonsTable;
-        private GameManeger m_GameManeger;
+        private GameManager m_GameManager;
 
-        public GameBoardForm(int i_Size, GameManeger i_GameManeger)
+        public GameBoardForm(int i_Size, GameManager i_GameManager)
         {
             m_Size = i_Size;
             m_ButtonsTable = new Button[m_Size, m_Size];
-            m_GameManeger = i_GameManeger;
+            m_GameManager = i_GameManager;
             initButtonsTableButton();
             this.AutoSize = true;
-            InitializeComponent();
+           // InitializeComponent();
+            this.labelPlyer1 = new System.Windows.Forms.Label();
+            this.labelPlyer2 = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+           ///todo Omri
+           /// put ths Labaels at the bottom of the page
+           // 
+            // labelPlyer1
+            // 
+            this.labelPlyer1.Top = this.Height - 5;
+            this.labelPlyer1.Name = "Player1Point";
+            this.labelPlyer1.Size = new System.Drawing.Size(100, 23);
+            this.labelPlyer1.TabIndex = 1;
+            this.labelPlyer1.Text = $" {m_GameManager.Player1Name} : {m_GameManager.getNumberOfWinPlayer1()}";
+            // 
+            // labelPlyer2
+            // 
+            this.labelPlyer2.Location = new System.Drawing.Point(0, 0);
+            this.labelPlyer2.Name = "Player2Point";
+            this.labelPlyer2.Size = new System.Drawing.Size(100, 23);
+            this.labelPlyer2.TabIndex = 0;
+            this.labelPlyer1.Text = $" {m_GameManager.Player2Name} : {m_GameManager.getNumberOfWinPlayer2()}";
+
         }
 
         private void initButtonsTableButton()
@@ -71,11 +93,8 @@ namespace UserInterfaceWindows
                     if (m_ButtonsTable[i,j] as Button == (i_Sender as Button))
                     {
                         (int row, int col) newPoint = (i, j);
-                        m_GameManeger.ValidPointFromUser(newPoint);
-                        //todo
-                        //just chack if work it doesnt work with computer player.
-                     
-                     
+                        m_GameManager.ValidPointFromUser(newPoint);
+                 
                     }
                 }
             }
@@ -83,23 +102,7 @@ namespace UserInterfaceWindows
 
         private void InitializeComponent()
         {
-            this.labelPlyer1 = new System.Windows.Forms.Label();
-            this.labelPlyer2 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // labelPlyer1
-            // 
-            this.labelPlyer1.Location = new System.Drawing.Point(0, 0);
-            this.labelPlyer1.Name = "labelPlyer1";
-            this.labelPlyer1.Size = new System.Drawing.Size(100, 23);
-            this.labelPlyer1.TabIndex = 1;
-            // 
-            // labelPlyer2
-            // 
-            this.labelPlyer2.Location = new System.Drawing.Point(0, 0);
-            this.labelPlyer2.Name = "labelPlyer2";
-            this.labelPlyer2.Size = new System.Drawing.Size(100, 23);
-            this.labelPlyer2.TabIndex = 0;
+           
             // 
             // GameBoardForm
             // 
@@ -111,10 +114,6 @@ namespace UserInterfaceWindows
 
         }
 
-        public static void GetPointOfButton(object i_Sender)
-        {
-            throw new NotImplementedException();
-        }
 
         public void setPoint((int row, int column) i_Arg1, ePlayersMark i_Arg2)
         {
@@ -157,7 +156,7 @@ See YOU next Semester");
             }
             else
             {
-                m_GameManeger.makeNewGame();
+                m_GameManager.makeNewGame();
                 this.Close();
                 isWantAnother = true;
             }

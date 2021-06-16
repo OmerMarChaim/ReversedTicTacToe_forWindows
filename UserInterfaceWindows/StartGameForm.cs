@@ -47,8 +47,8 @@ namespace UserInterfaceWindows
         {
             this.Text = "Game Settings";
             
-           m_MaxSizeOfBoard= GameManeger.getValidMaxSizeOfBoard();
-           m_MinSizeOfBoard = GameManeger.getValidMinSizeOfBoard();
+           m_MaxSizeOfBoard= GameManager.getValidMaxSizeOfBoard();
+           m_MinSizeOfBoard = GameManager.getValidMinSizeOfBoard();
 
             InitializeComponent();
 
@@ -234,7 +234,7 @@ namespace UserInterfaceWindows
             else
             {
                 this.Close();
-                new GameManeger(this);
+                new GameManager(this);
             }
             
         }
