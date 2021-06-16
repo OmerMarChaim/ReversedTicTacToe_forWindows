@@ -180,7 +180,7 @@ namespace UserInterfaceWindows
             // 
             // StartGameForm
             // 
-            this.ClientSize = new System.Drawing.Size(279, 500);
+            this.ClientSize = new System.Drawing.Size(230, 230);
             this.Controls.Add(this.m_ButtonStart);
             this.Controls.Add(this.m_Player1Name);
             this.Controls.Add(this.m_IsComputerBox);
@@ -194,6 +194,8 @@ namespace UserInterfaceWindows
             this.Controls.Add(this.m_ColsLabel);
             this.Controls.Add(this.m_RowsLabel);
             this.Name = "StartGameForm";
+            //this.AutoScale = true;
+            this.AutoSize = true;
             ((System.ComponentModel.ISupportInitialize)(this.m_ColsNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.m_RowsNumericUpDown)).EndInit();
             this.ResumeLayout(false);

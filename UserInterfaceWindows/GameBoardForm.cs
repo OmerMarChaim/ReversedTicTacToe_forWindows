@@ -35,11 +35,12 @@ namespace UserInterfaceWindows
            // 
             // labelPlyer1
             // 
-            this.labelPlyer1.Top = this.Height - 5;
+            this.labelPlyer1.Location = new System.Drawing.Point(200, 5*m_Size+25 );
             this.labelPlyer1.Name = "Player1Point";
             this.labelPlyer1.Size = new System.Drawing.Size(100, 23);
             this.labelPlyer1.TabIndex = 1;
             this.labelPlyer1.Text = $" {m_GameManager.Player1Name} : {m_GameManager.getNumberOfWinPlayer1()}";
+           // this.Controls.Add(labelPlyer1);
             // 
             // labelPlyer2
             // 
@@ -48,6 +49,9 @@ namespace UserInterfaceWindows
             this.labelPlyer2.Size = new System.Drawing.Size(100, 23);
             this.labelPlyer2.TabIndex = 0;
             this.labelPlyer1.Text = $" {m_GameManager.Player2Name} : {m_GameManager.getNumberOfWinPlayer2()}";
+        //    this.Controls.Add(labelPlyer2);
+
+            this.AutoSize = true;
 
         }
 
@@ -118,8 +122,10 @@ namespace UserInterfaceWindows
         public void setPoint((int row, int column) i_Arg1, ePlayersMark i_Arg2)
         {
             String symbolText = i_Arg2 == ePlayersMark.Player1 ? "X" : "O";
+            Color symbolColor= i_Arg2== ePlayersMark.Player1 ?  Color.Red :Color.MistyRose; 
             (m_ButtonsTable[i_Arg1.row, i_Arg1.column] as Button).Text = symbolText;
             (m_ButtonsTable[i_Arg1.row, i_Arg1.column] as Button).Enabled = false;
+            (m_ButtonsTable[i_Arg1.row, i_Arg1.column] as Button).BackColor= symbolColor;
         }
 
         public void showTieMessage()
