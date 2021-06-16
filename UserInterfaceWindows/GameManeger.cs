@@ -69,7 +69,7 @@ namespace UserInterfaceWindows
         // /// <returns></returns>
         private bool isUserWantAnotherGame()
         {
-            throw new NotImplementedException();
+           return m_gameBoardForm.isWantAnotherGame();
         }
 
         private void updateTheUserInterfaceAccordingTheState()
@@ -91,6 +91,8 @@ namespace UserInterfaceWindows
             {
                 quitMessage(signOfTheWinner, winnerName);
             }
+
+            isUserWantAnotherGame();
 
         }
 
@@ -133,6 +135,9 @@ namespace UserInterfaceWindows
             return GameLogic.MinBoardSize;
         }
 
-
+        internal void makeNewGame()
+        {
+            this.m_Game.PreparingForAnotherGame();
+        }
     }
 }

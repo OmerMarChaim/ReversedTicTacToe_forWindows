@@ -13,8 +13,7 @@ namespace UserInterfaceWindows
         {
             StartGameForm startGameForm = new StartGameForm();
             startGameForm.ShowDialog();
-            GameManeger game = new GameManeger(startGameForm);
-
+            
         }
     }
 }

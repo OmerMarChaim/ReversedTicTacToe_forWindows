@@ -130,17 +130,41 @@ namespace UserInterfaceWindows
 
         public void showWinMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
         {
-       
-
-
+           // String signOfWinner= i_SignOfTheWinner==
+            MessageBox.Show($@"There is a win! The winner in this round is : {i_WinnerName} ! Who play with {(Char)i_SignOfTheWinner}");
         }
 
         public void showQuitMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
         {
-            MessageBox.Show($@"You Quit from the Game! The winner in this round is : {i_WinnerName} ! Who play with {i_SignOfTheWinner}
+            MessageBox.Show($@"You Quit from the Game! The winner in this round is : {i_WinnerName} ! Who play with {(Char)i_SignOfTheWinner}
 See YOU next Semester");
         this.Close();
         }
+
+        public bool isWantAnotherGame()
+        {
+            bool isWantAnother = false;
+            string message = "Do you want to play another game?";
+            string title = "Another Game";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+
+            DialogResult resultFromUser = MessageBox.Show(message, title, buttons);
+            if(resultFromUser == DialogResult.No)
+            {
+                MessageBox.Show("Thank you for playing with us! see you Next Semester");
+                this.Close();
+                isWantAnother = false;
+            }
+            else
+            {
+                m_GameManeger.makeNewGame();
+                this.Close();
+                isWantAnother = true;
+            }
+
+            return isWantAnother;
+        }
+
     }
 
     

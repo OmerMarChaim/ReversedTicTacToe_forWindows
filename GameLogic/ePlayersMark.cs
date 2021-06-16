@@ -12,6 +12,6 @@ namespace ReverseTicTacToeGame
         Empty =0,
         Player1 ='X',
         Player2 ='O'
-
     }
+    
 }

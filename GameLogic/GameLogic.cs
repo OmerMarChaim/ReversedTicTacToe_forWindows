@@ -159,7 +159,7 @@ namespace ReverseTicTacToeGame
 
         private bool thereIsWin((int row, int column) i_Point, ePlayersMark i_PlayerMarkSign)
         {
-            int numberOfSignsToWin = this.GameBoard.Size - 1;
+            int numberOfSignsToWin = this.GameBoard.Size ;
             bool isWinInRowAndCol = checkWinInRowAndColumn(i_Point, i_PlayerMarkSign, numberOfSignsToWin);
             bool isWinInDiagonal = checkWinInMainDiagonal(i_PlayerMarkSign, numberOfSignsToWin);
             bool isWinInAntiDiagonal = checkWinInAntiDiagonal(i_PlayerMarkSign, numberOfSignsToWin);
@@ -173,9 +173,9 @@ namespace ReverseTicTacToeGame
 
             // In square matrix - the anti diagonal the sum of row and column equal to the matrix size+1
 
-            for(int i = 1; i <= this.GameBoard.Size - 1; i++)
+            for(int i = 0; i < this.GameBoard.Size; i++)
             {
-                if(m_GameBoard.GameBoard[i, m_GameBoard.Size - i] == i_PlayerMarkSign)
+                if(m_GameBoard.GameBoard[i, m_GameBoard.Size - i -1] == i_PlayerMarkSign)
                 {
                     counter++;
                 }
@@ -192,7 +192,7 @@ namespace ReverseTicTacToeGame
         {
             int counter = 0;
 
-            for(int i = 1; i < this.GameBoard.Size; i++)
+            for(int i = 0; i < this.GameBoard.Size; i++)
             {
                 if(this.GameBoard.GameBoard[i, i] == i_PlayerMark)
                 {
@@ -215,7 +215,7 @@ namespace ReverseTicTacToeGame
             int counterRow = 0;
             int counterColumn = 0;
 
-            for(int i = 1; i < this.GameBoard.Size; i++)
+            for(int i = 0; i < this.GameBoard.Size; i++)
             {
                 if(m_GameBoard.GameBoard[i_Point.row, i] == i_PlayerMark)
                 {
@@ -275,7 +275,7 @@ namespace ReverseTicTacToeGame
             return isValidSizeBoard;
         }
 
-        internal void PreparingForAnotherGame()
+        public void PreparingForAnotherGame()
         {
             CurrentGameState = eGameState.Playing;
             createNewBoardForAnotherGame();
