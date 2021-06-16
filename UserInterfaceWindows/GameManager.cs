@@ -79,6 +79,7 @@ namespace UserInterfaceWindows
         private bool isUserWantAnotherGame()
         {
            return m_gameBoardForm.isWantAnotherGame();
+
         }
 
         private void updateTheUserInterfaceAccordingTheState()
@@ -101,7 +102,10 @@ namespace UserInterfaceWindows
                 quitMessage(signOfTheWinner, winnerName);
             }
 
-            isUserWantAnotherGame();
+            if(isUserWantAnotherGame())
+            {
+                InitGameBoardForm();
+            }
 
         }
 
