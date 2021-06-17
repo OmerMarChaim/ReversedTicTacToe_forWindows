@@ -17,6 +17,8 @@ namespace UserInterfaceWindows
         private Label labelPlyer1;
         private Label labelPlyer2;
         private readonly Button[,] m_ButtonsTable;
+        private Label labelPlayer1Score;
+        private Label labelPlayer2Score;
         private GameManager m_GameManager;
 
         public GameBoardForm(int i_Size, GameManager i_GameManager)
@@ -24,33 +26,15 @@ namespace UserInterfaceWindows
             m_Size = i_Size;
             m_ButtonsTable = new Button[m_Size, m_Size];
             m_GameManager = i_GameManager;
-            initButtonsTableButton();
+           
+           
             this.AutoSize = true;
            // InitializeComponent();
-            this.labelPlyer1 = new System.Windows.Forms.Label();
-            this.labelPlyer2 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-           ///todo Omri
-           /// put ths Labaels at the bottom of the page
-           // 
-            // labelPlyer1
-            // 
-            this.labelPlyer1.Location = new System.Drawing.Point(200, 5*m_Size+25 );
-            this.labelPlyer1.Name = "Player1Point";
-            this.labelPlyer1.Size = new System.Drawing.Size(100, 23);
-            this.labelPlyer1.TabIndex = 1;
-            this.labelPlyer1.Text = $" {m_GameManager.Player1Name} : {m_GameManager.getNumberOfWinPlayer1()}";
-           // this.Controls.Add(labelPlyer1);
-            // 
-            // labelPlyer2
-            // 
-            this.labelPlyer2.Location = new System.Drawing.Point(0, 0);
-            this.labelPlyer2.Name = "Player2Point";
-            this.labelPlyer2.Size = new System.Drawing.Size(100, 23);
-            this.labelPlyer2.TabIndex = 0;
-            this.labelPlyer1.Text = $" {m_GameManager.Player2Name} : {m_GameManager.getNumberOfWinPlayer2()}";
-        //    this.Controls.Add(labelPlyer2);
-
+    
+          //  this.SuspendLayout();
+            initButtonsTableButton();
+            InitializeComponent();
+        
             this.AutoSize = true;
             this.Text = "Reverse Tic Tac Toe";
             this.Name = "GameBoardForm";
@@ -67,7 +51,7 @@ namespace UserInterfaceWindows
                 for (int j = 0; j < m_Size; j++)
                 {
                     Button newButton = initNewButton(wantedLeft, wantedTop);
-                  
+                    
                     
                     wantedLeft = newButton.Left + 55;
                     m_ButtonsTable[i, j] = newButton;
@@ -84,7 +68,6 @@ namespace UserInterfaceWindows
             newButton.Size = new Size(50, 50);
             newButton.Left = i_WantedLeft;
             newButton.Top = i_WantedTop;
-         
             newButton.Click += newButton_Click;
             this.Controls.Add(newButton);
             return newButton;
@@ -111,26 +94,53 @@ namespace UserInterfaceWindows
 
         private void InitializeComponent()
         {
-           
+            this.labelPlayer1Score = new System.Windows.Forms.Label();
+            this.labelPlayer2Score = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // labelPlayer1Score
+            // 
+            this.labelPlayer1Score.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.labelPlayer1Score.AutoSize = true;
+            this.labelPlayer1Score.Location = new System.Drawing.Point(58, 187);
+            this.labelPlayer1Score.Name = "labelPlayer1Score";
+            this.labelPlayer1Score.Size = new System.Drawing.Size(69, 20);
+            this.labelPlayer1Score.TabIndex = 8;
+            this.labelPlayer1Score.Text = "Player 1:";
+            // 
+            // labelPlayer2Score
+            // 
+            this.labelPlayer2Score.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelPlayer2Score.AutoSize = true;
+            this.labelPlayer2Score.Location = new System.Drawing.Point(133, 187);
+            this.labelPlayer2Score.Name = "labelPlayer2Score";
+            this.labelPlayer2Score.Size = new System.Drawing.Size(64, 20);
+            this.labelPlayer2Score.TabIndex = 9;
+            this.labelPlayer2Score.Text = "player 2";
             // 
             // GameBoardForm
             // 
-            this.ClientSize = new System.Drawing.Size(369, 297);
-            this.Controls.Add(this.labelPlyer2);
-            this.Controls.Add(this.labelPlyer1);
-        
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(278, 207);
+            this.Controls.Add(this.labelPlayer2Score);
+            this.Controls.Add(this.labelPlayer1Score);
+            this.Name = "GameBoardForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
 
-        public void setPoint((int row, int column) i_Arg1, ePlayersMark i_Arg2)
+        public void setPoint((int row, int column) i_SelectedPoint, ePlayersMark i_PlayerSign)
         {
-            String symbolText = i_Arg2 == ePlayersMark.Player1 ? "X" : "O";
-            Color symbolColor= i_Arg2== ePlayersMark.Player1 ?  Color.Red :Color.MistyRose; 
-            (m_ButtonsTable[i_Arg1.row, i_Arg1.column] as Button).Text = symbolText;
-            (m_ButtonsTable[i_Arg1.row, i_Arg1.column] as Button).Enabled = false;
-            (m_ButtonsTable[i_Arg1.row, i_Arg1.column] as Button).BackColor= symbolColor;
+            String symbolText = i_PlayerSign == ePlayersMark.Player1 ? "X" : "O";
+            Color symbolColor= i_PlayerSign== ePlayersMark.Player1 ?  Color.Red :Color.MistyRose; 
+            (m_ButtonsTable[i_SelectedPoint.row, i_SelectedPoint.column] as Button).Text = symbolText;
+            (m_ButtonsTable[i_SelectedPoint.row, i_SelectedPoint.column] as Button).Enabled = false;
+            (m_ButtonsTable[i_SelectedPoint.row, i_SelectedPoint.column] as Button).BackColor= symbolColor;
         }
 
         public void showTieMessage()
@@ -168,7 +178,7 @@ See YOU next Time");
             else
             {
                 m_GameManager.makeNewGame();
-                this.Close();
+                this.Hide();
                 isWantAnother = true;
             }
 

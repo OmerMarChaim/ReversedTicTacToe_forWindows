@@ -77,24 +77,23 @@ namespace UserInterfaceWindows
             // 
             // m_ButtonStart
             // 
-            this.m_ButtonStart.Location = new System.Drawing.Point(20, 172);
+            this.m_ButtonStart.Location = new System.Drawing.Point(14, 175);
             this.m_ButtonStart.Name = "m_ButtonStart";
-            this.m_ButtonStart.Size = new System.Drawing.Size(200, 32);
+            this.m_ButtonStart.Size = new System.Drawing.Size(233, 32);
             this.m_ButtonStart.TabIndex = 0;
             this.m_ButtonStart.Text = "Let\'s Start";
-            this.m_ButtonStart.Click += this.m_ButtonStart_Click;
+            this.m_ButtonStart.Click += new System.EventHandler(this.m_ButtonStart_Click);
             // 
             // m_Player1Name
             // 
-            this.m_Player1Name.Location = new System.Drawing.Point(132, 40);
+            this.m_Player1Name.Location = new System.Drawing.Point(147, 37);
             this.m_Player1Name.Name = "m_Player1Name";
             this.m_Player1Name.Size = new System.Drawing.Size(100, 26);
             this.m_Player1Name.TabIndex = 1;
-            this.m_Player1Name.TextChanged += new System.EventHandler(this.m_Player1Name_TextChanged);
             // 
             // m_IsComputerBox
             // 
-            this.m_IsComputerBox.Location = new System.Drawing.Point(20, 67);
+            this.m_IsComputerBox.Location = new System.Drawing.Point(34, 76);
             this.m_IsComputerBox.Name = "m_IsComputerBox";
             this.m_IsComputerBox.Size = new System.Drawing.Size(20, 20);
             this.m_IsComputerBox.TabIndex = 2;
@@ -102,7 +101,8 @@ namespace UserInterfaceWindows
             // 
             // m_ColsNumericUpDown
             // 
-            this.m_ColsNumericUpDown.Location = new System.Drawing.Point(71, 130);
+            this.m_ColsNumericUpDown.AutoSize = true;
+            this.m_ColsNumericUpDown.Location = new System.Drawing.Point(89, 131);
             this.m_ColsNumericUpDown.Maximum = new decimal(new int[] {
             10,
             0,
@@ -114,7 +114,7 @@ namespace UserInterfaceWindows
             0,
             0});
             this.m_ColsNumericUpDown.Name = "m_ColsNumericUpDown";
-            this.m_ColsNumericUpDown.Size = new System.Drawing.Size(49, 26);
+            this.m_ColsNumericUpDown.Size = new System.Drawing.Size(51, 26);
             this.m_ColsNumericUpDown.TabIndex = 3;
             this.m_ColsNumericUpDown.Value = new decimal(new int[] {
             5,
@@ -125,7 +125,8 @@ namespace UserInterfaceWindows
             // 
             // m_RowsNumericUpDown
             // 
-            this.m_RowsNumericUpDown.Location = new System.Drawing.Point(186, 131);
+            this.m_RowsNumericUpDown.AutoSize = true;
+            this.m_RowsNumericUpDown.Location = new System.Drawing.Point(196, 131);
             this.m_RowsNumericUpDown.Maximum = new decimal(new int[] {
             10,
             0,
@@ -137,7 +138,7 @@ namespace UserInterfaceWindows
             0,
             0});
             this.m_RowsNumericUpDown.Name = "m_RowsNumericUpDown";
-            this.m_RowsNumericUpDown.Size = new System.Drawing.Size(46, 26);
+            this.m_RowsNumericUpDown.Size = new System.Drawing.Size(51, 26);
             this.m_RowsNumericUpDown.TabIndex = 4;
             this.m_RowsNumericUpDown.Value = new decimal(new int[] {
             5,
@@ -149,7 +150,7 @@ namespace UserInterfaceWindows
             // m_Player2Name
             // 
             this.m_Player2Name.Enabled = false;
-            this.m_Player2Name.Location = new System.Drawing.Point(132, 67);
+            this.m_Player2Name.Location = new System.Drawing.Point(147, 72);
             this.m_Player2Name.Name = "m_Player2Name";
             this.m_Player2Name.Size = new System.Drawing.Size(100, 26);
             this.m_Player2Name.TabIndex = 5;
@@ -165,7 +166,7 @@ namespace UserInterfaceWindows
             // 
             // m_Player1label
             // 
-            this.m_Player1label.Location = new System.Drawing.Point(17, 40);
+            this.m_Player1label.Location = new System.Drawing.Point(30, 40);
             this.m_Player1label.Name = "m_Player1label";
             this.m_Player1label.Size = new System.Drawing.Size(78, 24);
             this.m_Player1label.TabIndex = 7;
@@ -173,7 +174,7 @@ namespace UserInterfaceWindows
             // 
             // m_Player2label
             // 
-            this.m_Player2label.Location = new System.Drawing.Point(46, 70);
+            this.m_Player2label.Location = new System.Drawing.Point(60, 75);
             this.m_Player2label.Name = "m_Player2label";
             this.m_Player2label.Size = new System.Drawing.Size(74, 23);
             this.m_Player2label.TabIndex = 8;
@@ -181,7 +182,7 @@ namespace UserInterfaceWindows
             // 
             // m_BoardSize
             // 
-            this.m_BoardSize.Location = new System.Drawing.Point(20, 100);
+            this.m_BoardSize.Location = new System.Drawing.Point(10, 104);
             this.m_BoardSize.Name = "m_BoardSize";
             this.m_BoardSize.Size = new System.Drawing.Size(100, 23);
             this.m_BoardSize.TabIndex = 9;
@@ -189,17 +190,19 @@ namespace UserInterfaceWindows
             // 
             // m_ColsLabel
             // 
-            this.m_ColsLabel.Location = new System.Drawing.Point(20, 132);
+            this.m_ColsLabel.AutoSize = true;
+            this.m_ColsLabel.Location = new System.Drawing.Point(146, 133);
             this.m_ColsLabel.Name = "m_ColsLabel";
-            this.m_ColsLabel.Size = new System.Drawing.Size(50, 20);
+            this.m_ColsLabel.Size = new System.Drawing.Size(44, 20);
             this.m_ColsLabel.TabIndex = 10;
             this.m_ColsLabel.Text = "Cols:";
             // 
             // m_RowsLabel
             // 
-            this.m_RowsLabel.Location = new System.Drawing.Point(126, 132);
+            this.m_RowsLabel.AutoSize = true;
+            this.m_RowsLabel.Location = new System.Drawing.Point(30, 133);
             this.m_RowsLabel.Name = "m_RowsLabel";
-            this.m_RowsLabel.Size = new System.Drawing.Size(53, 24);
+            this.m_RowsLabel.Size = new System.Drawing.Size(53, 20);
             this.m_RowsLabel.TabIndex = 11;
             this.m_RowsLabel.Text = "Rows:";
             // 
@@ -263,7 +266,7 @@ namespace UserInterfaceWindows
             }
             else
             {
-                this.Close();
+                this.Hide();
                 new GameManager(this);
             }
             
@@ -274,9 +277,8 @@ namespace UserInterfaceWindows
             this.Close();
         }
 
-        private void m_Player1Name_TextChanged(object sender, EventArgs e)
-        {
+     
 
-        }
+    
     }
 }

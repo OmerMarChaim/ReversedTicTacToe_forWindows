@@ -15,7 +15,6 @@ namespace ReverseTicTacToeGame
         private const int k_MaxBoardSize = 10;
         private Random m_Random;
         private Player m_currentPlayer;
-        //public event Action<(int row, int column), ePlayersMark> m_1ReportNewPointDelegates;
 
         public enum eGameState
         {
@@ -154,6 +153,7 @@ namespace ReverseTicTacToeGame
         private void createNewBoardForAnotherGame()
         {
             int boardSize = this.GameBoard.Size;
+            this.m_currentPlayer = m_Player1;
             this.m_GameBoard = new Board(boardSize);
         }
 
