@@ -52,6 +52,7 @@ namespace UserInterfaceWindows
         //    this.Controls.Add(labelPlyer2);
 
             this.AutoSize = true;
+            this.Text = "Reverse Tic Tac Toe";
             this.Name = "GameBoardForm";
             this.StartPosition = FormStartPosition.CenterScreen;
 
@@ -83,6 +84,7 @@ namespace UserInterfaceWindows
             newButton.Size = new Size(50, 50);
             newButton.Left = i_WantedLeft;
             newButton.Top = i_WantedTop;
+         
             newButton.Click += newButton_Click;
             this.Controls.Add(newButton);
             return newButton;
@@ -92,6 +94,7 @@ namespace UserInterfaceWindows
 
         private void newButton_Click(object i_Sender, EventArgs i_E)
         {
+        
             for(int i = 0; i < m_Size; i++)
             {
                 for(int j = 0; j < m_Size ; j++)
@@ -158,7 +161,7 @@ See YOU next Time");
             DialogResult resultFromUser = MessageBox.Show(message, title, buttons);
             if(resultFromUser == DialogResult.No)
             {
-                MessageBox.Show("Thank you for playing with us! see you Next Semester");
+                MessageBox.Show("Thank you for playing with us! see YOU next Time");
                 this.Close();
                 isWantAnother = false;
             }
