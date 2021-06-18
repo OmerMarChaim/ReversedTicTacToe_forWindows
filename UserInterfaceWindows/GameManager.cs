@@ -7,6 +7,8 @@ namespace UserInterfaceWindows
 {
     internal class GameManager
     {
+
+
         private readonly int r_BoardSize;
         private readonly string r_Player1Name;
         private readonly string r_Player2Name;
@@ -20,29 +22,62 @@ namespace UserInterfaceWindows
             r_Game = new GameLogic(r_BoardSize, false, player2IsComputer);
             r_Player1Name = i_SettingsForm.Player1Name;
             r_Player2Name = i_SettingsForm.Player2Name;
+            r_Game.GameOver += this.showGameOverStatus;
             this.initGameBoardForm();
         }
 
-        public String Player1Name
+        public string Player1Name
         {
             get { return r_Player1Name; }
         }
-        public String Player2Name
+        public string Player2Name
         {
             get { return r_Player2Name; }
         }
 
-        private void reportNewPoint((int row, int column) i_Arg1, ePlayersMark i_Arg2)
+        private void reportNewPoint((int row, int column) i_Point, ePlayersMark i_PlayerSign)
         {
-            m_GameBoardForm.SetPoint(i_Arg1, i_Arg2);
+            m_GameBoardForm.SetPoint(i_Point, i_PlayerSign);
         }
 
         private void initGameBoardForm()
         {
             m_GameBoardForm = new GameBoardForm(r_BoardSize, this);
             r_Game.GameBoard.ReportNewPointDelegates += this.reportNewPoint;
-
+       
             m_GameBoardForm.ShowDialog();
+        }
+
+        private void showGameOverStatus(object sender, GameOverEventArgs e)
+        {
+            GameLogic.eGameState currentState = e.GameState;
+            ePlayersMark signOfTheWinner = this.r_Game.WinnerPlayer.Sign;
+            string winnerName = signOfTheWinner == ePlayersMark.Player1 ? r_Player1Name : r_Player2Name;
+
+            switch (currentState)
+            {
+                case Win:
+                 //   winMessage(signOfTheWinner, winnerName);
+                    m_GameBoardForm.ShowWinMessage(signOfTheWinner, winnerName);
+
+                    break;
+                case Tie:
+                    m_GameBoardForm.ShowTieMessage();
+
+
+                    break;
+                case Quit:
+                 //   quitMessage(signOfTheWinner, winnerName);
+                    m_GameBoardForm.ShowQuitMessage(signOfTheWinner, winnerName);
+
+                    break;
+              
+            }
+            if (isUserWantAnotherGame())
+            {
+                initGameBoardForm();
+            }
+
         }
 
         private bool isUserWantAnotherGame()
@@ -53,29 +88,8 @@ namespace UserInterfaceWindows
         private void updateTheUserInterfaceAccordingTheState()
         {
             GameLogic.eGameState currentState = this.r_Game.CurrentGameState;
-            ePlayersMark signOfTheWinner = this.r_Game.WinnerPlayer.Sign;
-            string winnerName = signOfTheWinner == ePlayersMark.Player1 ? r_Player1Name : r_Player2Name;
 
-            switch(currentState)
-            {
-                case Win:
-                    winMessage(signOfTheWinner, winnerName);
 
-                    break;
-                case Tie:
-                    tieMessage();
-
-                    break;
-                case Quit:
-                    quitMessage(signOfTheWinner, winnerName);
-
-                    break;
-            }
-
-            if(isUserWantAnotherGame())
-            {
-                initGameBoardForm();
-            }
         }
 
         private void tieMessage() // Checked
@@ -96,10 +110,6 @@ namespace UserInterfaceWindows
         public void ValidPointFromUser((int row, int col) i_Point)
         {
             r_Game.OneRoundInGame(i_Point);
-            if(this.r_Game.CurrentGameState != GameLogic.eGameState.Playing)
-            {
-                updateTheUserInterfaceAccordingTheState();
-            }
         }
 
         public int GetNumberOfWinPlayer1()

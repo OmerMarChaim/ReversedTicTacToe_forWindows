@@ -90,7 +90,7 @@ namespace UserInterfaceWindows
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new Size(1000, m_LabelPlayer1Score.Bottom + 20);
+            this.ClientSize = new Size(r_ButtonsTable[0,m_Size-1].Right+20, m_LabelPlayer1Score.Bottom + 20);
             this.Controls.Add(this.m_LabelPlayer1Score);
             this.Name = "GameBoardForm";
             this.StartPosition = FormStartPosition.CenterScreen;

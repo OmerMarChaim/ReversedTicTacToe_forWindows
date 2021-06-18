@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Linq;
+using UserInterfaceWindows;
 
 namespace ReverseTicTacToeGame
 {
+    public delegate void GameOverEventHandler(object sender, GameOverEventArgs e);
+
     public class GameLogic
     {
+        public event GameOverEventHandler GameOver;
         private Board m_GameBoard;
         private Player m_Player1;
         private Player m_Player2;
@@ -83,11 +87,26 @@ namespace ReverseTicTacToeGame
                 //Report to Form
                 // i_GameUi.CleanAndShowBeforeNewTurn();
                 m_CurrentPlayer = m_CurrentPlayer.Equals(m_Player1) ? m_Player2 : m_Player1;
-                if(m_CurrentGameState != eGameState.Playing || !m_CurrentPlayer.IsComputer)
+                if(m_CurrentGameState != eGameState.Playing )
+                {
+                    notifyGameOverListener(m_CurrentGameState, m_WinnerPlayer);
+                    break;
+
+                }
+                else if(!m_CurrentPlayer.IsComputer)
                 {
                     break;
                 }
             }
+        }
+
+        private void notifyGameOverListener(eGameState i_CurrentGameState, Player i_WinnerPlayer)
+        { 
+       GameOverEventArgs gameOverArgs = new GameOverEventArgs();
+       gameOverArgs.GameState = i_CurrentGameState;
+       gameOverArgs.WinnerPlayer = i_WinnerPlayer;
+
+            GameOver?.Invoke(this, gameOverArgs);
         }
 
         private void updateStateOfGame((int row, int column) i_LastPointEntered, Player i_Player)

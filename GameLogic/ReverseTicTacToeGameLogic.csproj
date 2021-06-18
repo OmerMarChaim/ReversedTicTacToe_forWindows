@@ -42,6 +42,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="ePlayersMark.cs" />
     <Compile Include="GameLogic.cs" />
+    <Compile Include="GameOverEventArgs.cs" />
     <Compile Include="Player.cs" />
   </ItemGroup>
   <ItemGroup>
