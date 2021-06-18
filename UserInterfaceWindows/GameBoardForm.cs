@@ -7,15 +7,15 @@ namespace UserInterfaceWindows
 {
     class GameBoardForm : Form
     {
-        private int m_Size;
+        private readonly int r_Size;
         private readonly ButtonInMetrix[,] r_ButtonsTable;
-        private Label m_LabelPlayer1Score;
+        private Label m_LabelPlayersScore;
         private GameManager m_GameManager;
 
         public GameBoardForm(int i_Size, GameManager i_GameManager)
         {
-            m_Size = i_Size;
-            r_ButtonsTable = new ButtonInMetrix[m_Size, m_Size];
+            r_Size = i_Size;
+            r_ButtonsTable = new ButtonInMetrix[r_Size, r_Size];
             m_GameManager = i_GameManager;
 
             initButtonsTableButton();
@@ -30,9 +30,9 @@ namespace UserInterfaceWindows
         {
             int wantedTop = 5;
             int wantedLeft = 5;
-            for(int i = 0; i < m_Size; i++)
+            for(int i = 0; i < r_Size; i++)
             {
-                for(int j = 0; j < m_Size; j++)
+                for(int j = 0; j < r_Size; j++)
                 {
                     ButtonInMetrix newButton = initNewButton(wantedLeft, wantedTop, i, j);
                     wantedLeft = newButton.Left + 55;
@@ -68,20 +68,20 @@ namespace UserInterfaceWindows
         // ReSharper disable once InconsistentNaming
         private void InitializeComponent()
         {
-            this.m_LabelPlayer1Score = new Label();
+            this.m_LabelPlayersScore = new Label();
             this.SuspendLayout();
             // 
             // labelPlayer1Score
             // 
-            this.m_LabelPlayer1Score.AutoSize = true;
-            this.m_LabelPlayer1Score.Location = new Point(
-                    r_ButtonsTable[(m_Size) / 2 - 2, 0].Bottom,
-                    r_ButtonsTable[m_Size - 1, 0].Bottom);
-            this.m_LabelPlayer1Score.Name = "m_LabelPlayer1Score";
-            this.m_LabelPlayer1Score.Padding = new Padding(5);
-            this.m_LabelPlayer1Score.Size = new Size(79, 30);
-            this.m_LabelPlayer1Score.TabIndex = 8;
-            this.m_LabelPlayer1Score.Text =
+            this.m_LabelPlayersScore.AutoSize = true;
+            this.m_LabelPlayersScore.Location = new Point(
+                    r_ButtonsTable[(r_Size) / 2 - 2, 0].Bottom,
+                    r_ButtonsTable[r_Size - 1, 0].Bottom);
+            this.m_LabelPlayersScore.Name = "m_LabelPlayersScore";
+            this.m_LabelPlayersScore.Padding = new Padding(5);
+            this.m_LabelPlayersScore.Size = new Size(79, 30);
+            this.m_LabelPlayersScore.TabIndex = 8;
+            this.m_LabelPlayersScore.Text =
                 $@"{m_GameManager.Player1Name} : {m_GameManager.GetNumberOfWinPlayer1()}      {m_GameManager.Player2Name} : {m_GameManager.GetNumberOfWinPlayer2()} ";
 
             // 
@@ -90,8 +90,8 @@ namespace UserInterfaceWindows
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new Size(r_ButtonsTable[0,m_Size-1].Right+20, m_LabelPlayer1Score.Bottom + 20);
-            this.Controls.Add(this.m_LabelPlayer1Score);
+            this.ClientSize = new Size(r_ButtonsTable[0,r_Size-1].Right+20, m_LabelPlayersScore.Bottom + 20);
+            this.Controls.Add(this.m_LabelPlayersScore);
             this.Name = "GameBoardForm";
             this.StartPosition = FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
