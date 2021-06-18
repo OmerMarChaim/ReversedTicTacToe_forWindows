@@ -39,6 +39,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ButtonInMetrix.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GameBoardForm.cs">
       <SubType>Form</SubType>
     </Compile>

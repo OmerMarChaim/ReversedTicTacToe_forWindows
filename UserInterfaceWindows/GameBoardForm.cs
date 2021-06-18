@@ -50,7 +50,7 @@ namespace UserInterfaceWindows
             {
                 for (int j = 0; j < m_Size; j++)
                 {
-                    Button newButton = initNewButton(wantedLeft, wantedTop);
+                    ButtonInMetrix newButton = initNewButton(wantedLeft, wantedTop,i,j);
                     
                     
                     wantedLeft = newButton.Left + 55;
@@ -62,9 +62,9 @@ namespace UserInterfaceWindows
             }
         }
 
-        private Button initNewButton(int i_WantedLeft, int i_WantedTop)
+        private ButtonInMetrix initNewButton(int i_WantedLeft, int i_WantedTop,int i_RowNumber,int i_ColNumber)
         {
-            Button newButton = new Button();
+            ButtonInMetrix newButton = new ButtonInMetrix(i_RowNumber,i_ColNumber);
             newButton.Size = new Size(50, 50);
             newButton.Left = i_WantedLeft;
             newButton.Top = i_WantedTop;
@@ -77,19 +77,12 @@ namespace UserInterfaceWindows
 
         private void newButton_Click(object i_Sender, EventArgs i_E)
         {
-        
-            for(int i = 0; i < m_Size; i++)
-            {
-                for(int j = 0; j < m_Size ; j++)
-                {
-                    if (m_ButtonsTable[i,j] as Button == (i_Sender as Button))
-                    {
-                        (int row, int col) newPoint = (i, j);
-                        m_GameManager.ValidPointFromUser(newPoint);
+            int rowNumber = (i_Sender as ButtonInMetrix).RowNumber;
+            int colNumber = (i_Sender as ButtonInMetrix).ColNumber;
+            (int row, int col) newPoint = (rowNumber, colNumber);
+            m_GameManager.ValidPointFromUser(newPoint);
                  
-                    }
-                }
-            }
+                    
         }
 
         private void InitializeComponent()
