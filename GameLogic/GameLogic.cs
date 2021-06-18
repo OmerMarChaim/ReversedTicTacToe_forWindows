@@ -18,6 +18,7 @@ namespace ReverseTicTacToeGame
         private const int k_MaxBoardSize = 10;
         private Random m_Random;
         private Player m_CurrentPlayer;
+        private GameOverEventArgs m_GameOverArgs;
 
         public enum eGameState
         {
@@ -101,12 +102,19 @@ namespace ReverseTicTacToeGame
         }
 
         private void notifyGameOverListener(eGameState i_CurrentGameState, Player i_WinnerPlayer)
-        { 
-       GameOverEventArgs gameOverArgs = new GameOverEventArgs();
-       gameOverArgs.GameState = i_CurrentGameState;
-       gameOverArgs.WinnerPlayer = i_WinnerPlayer;
+        {
+            if(m_GameOverArgs != null)
+            {
+                m_GameOverArgs.WinnerPlayer = i_WinnerPlayer;
+                m_GameOverArgs.GameState = i_CurrentGameState;
+            }
+            else
+            {
+               m_GameOverArgs = new GameOverEventArgs(i_CurrentGameState, i_WinnerPlayer);
 
-            GameOver?.Invoke(this, gameOverArgs);
+            }
+
+            GameOver?.Invoke(this, m_GameOverArgs);
         }
 
         private void updateStateOfGame((int row, int column) i_LastPointEntered, Player i_Player)

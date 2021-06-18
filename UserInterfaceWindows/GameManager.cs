@@ -44,14 +44,13 @@ namespace UserInterfaceWindows
         {
             m_GameBoardForm = new GameBoardForm(r_BoardSize, this);
             r_Game.GameBoard.ReportNewPointDelegates += this.reportNewPoint;
-       
             m_GameBoardForm.ShowDialog();
         }
 
         private void showGameOverStatus(object sender, GameOverEventArgs e)
         {
             GameLogic.eGameState currentState = e.GameState;
-            ePlayersMark signOfTheWinner = this.r_Game.WinnerPlayer.Sign;
+            ePlayersMark signOfTheWinner = e.WinnerPlayer.Sign;
             string winnerName = signOfTheWinner == ePlayersMark.Player1 ? r_Player1Name : r_Player2Name;
 
             switch (currentState)
@@ -63,7 +62,6 @@ namespace UserInterfaceWindows
                     break;
                 case Tie:
                     m_GameBoardForm.ShowTieMessage();
-
 
                     break;
                 case Quit:
@@ -83,13 +81,6 @@ namespace UserInterfaceWindows
         private bool isUserWantAnotherGame()
         {
             return m_GameBoardForm.IsWantAnotherGame();
-        }
-
-        private void updateTheUserInterfaceAccordingTheState()
-        {
-            GameLogic.eGameState currentState = this.r_Game.CurrentGameState;
-
-
         }
 
         private void tieMessage() // Checked

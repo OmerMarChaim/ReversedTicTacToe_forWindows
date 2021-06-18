@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ReverseTicTacToeGame;
 
 namespace UserInterfaceWindows
@@ -17,11 +13,6 @@ namespace UserInterfaceWindows
             m_WinnerPlayer = i_WinnerPlayer;
         }
 
-        public GameOverEventArgs()
-        {
-            
-        }
-
         public GameLogic.eGameState GameState
         {
             get { return m_GameState;}
@@ -31,7 +22,6 @@ namespace UserInterfaceWindows
         {
             get { return m_WinnerPlayer; }
             set { m_WinnerPlayer = value; }
-
         }
     }
 }
