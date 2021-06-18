@@ -14,8 +14,6 @@ namespace UserInterfaceWindows
         private int m_Size;
         private const char k_Circle = 'O';
         private const char k_Cross = 'X';
-        private Label labelPlyer1;
-        private Label labelPlyer2;
         private readonly Button[,] m_ButtonsTable;
         private Label labelPlayer1Score;
         private Label labelPlayer2Score;
@@ -29,12 +27,13 @@ namespace UserInterfaceWindows
            
            
             this.AutoSize = true;
-           // InitializeComponent();
-    
-          //  this.SuspendLayout();
+            // InitializeComponent();
+
+            //  this.SuspendLayout();
+        
             initButtonsTableButton();
             InitializeComponent();
-        
+
             this.AutoSize = true;
             this.Text = "Reverse Tic Tac Toe";
             this.Name = "GameBoardForm";
@@ -51,8 +50,6 @@ namespace UserInterfaceWindows
                 for (int j = 0; j < m_Size; j++)
                 {
                     ButtonInMetrix newButton = initNewButton(wantedLeft, wantedTop,i,j);
-                    
-                    
                     wantedLeft = newButton.Left + 55;
                     m_ButtonsTable[i, j] = newButton;
 
@@ -93,31 +90,23 @@ namespace UserInterfaceWindows
             // 
             // labelPlayer1Score
             // 
-            this.labelPlayer1Score.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+         //   this.labelPlayer1Score.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.labelPlayer1Score.AutoSize = true;
-            this.labelPlayer1Score.Location = new System.Drawing.Point(58, 187);
+            this.labelPlayer1Score.Location = new System.Drawing.Point(m_ButtonsTable[(m_Size - 1)/2 - 1, 0].Bottom, m_ButtonsTable[m_Size-1,0].Bottom);
             this.labelPlayer1Score.Name = "labelPlayer1Score";
-            this.labelPlayer1Score.Size = new System.Drawing.Size(69, 20);
+            this.labelPlayer1Score.Padding = new System.Windows.Forms.Padding(5);
+            this.labelPlayer1Score.Size = new System.Drawing.Size(79, 30);
             this.labelPlayer1Score.TabIndex = 8;
-            this.labelPlayer1Score.Text = "Player 1:";
-            // 
-            // labelPlayer2Score
-            // 
-            this.labelPlayer2Score.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelPlayer2Score.AutoSize = true;
-            this.labelPlayer2Score.Location = new System.Drawing.Point(133, 187);
-            this.labelPlayer2Score.Name = "labelPlayer2Score";
-            this.labelPlayer2Score.Size = new System.Drawing.Size(64, 20);
-            this.labelPlayer2Score.TabIndex = 9;
-            this.labelPlayer2Score.Text = "player 2";
+            this.labelPlayer1Score.Text = $@"{m_GameManager.Player1Name} : {m_GameManager.getNumberOfWinPlayer1()}      {m_GameManager.Player2Name} : {m_GameManager.getNumberOfWinPlayer2()} ";
+      
             // 
             // GameBoardForm
             // 
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(278, 207);
-            this.Controls.Add(this.labelPlayer2Score);
+            this.ClientSize = new System.Drawing.Size(1000, labelPlayer1Score.Bottom+20);
+         //   this.Controls.Add(this.labelPlayer2Score);
             this.Controls.Add(this.labelPlayer1Score);
             this.Name = "GameBoardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -150,7 +139,7 @@ namespace UserInterfaceWindows
         public void showQuitMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
         {
             MessageBox.Show($@"You Quit from the Game! The winner in this round is : {i_WinnerName} ! Who play with {(Char)i_SignOfTheWinner}
-See YOU next Time");
+See YOU next Semester");
         this.Close();
         }
 
@@ -178,6 +167,7 @@ See YOU next Time");
             return isWantAnother;
         }
 
+    
     }
 
     

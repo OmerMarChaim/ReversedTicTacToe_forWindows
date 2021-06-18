@@ -103,16 +103,8 @@ namespace UserInterfaceWindows
             // 
             this.m_ColsNumericUpDown.AutoSize = true;
             this.m_ColsNumericUpDown.Location = new System.Drawing.Point(89, 131);
-            this.m_ColsNumericUpDown.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.m_ColsNumericUpDown.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.m_ColsNumericUpDown.Maximum = m_MaxSizeOfBoard;
+            this.m_ColsNumericUpDown.Minimum = m_MinSizeOfBoard;
             this.m_ColsNumericUpDown.Name = "m_ColsNumericUpDown";
             this.m_ColsNumericUpDown.Size = new System.Drawing.Size(51, 26);
             this.m_ColsNumericUpDown.TabIndex = 3;
@@ -127,16 +119,8 @@ namespace UserInterfaceWindows
             // 
             this.m_RowsNumericUpDown.AutoSize = true;
             this.m_RowsNumericUpDown.Location = new System.Drawing.Point(196, 131);
-            this.m_RowsNumericUpDown.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.m_RowsNumericUpDown.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.m_RowsNumericUpDown.Maximum = m_MaxSizeOfBoard;
+            this.m_RowsNumericUpDown.Minimum = m_MinSizeOfBoard;
             this.m_RowsNumericUpDown.Name = "m_RowsNumericUpDown";
             this.m_RowsNumericUpDown.Size = new System.Drawing.Size(51, 26);
             this.m_RowsNumericUpDown.TabIndex = 4;
@@ -154,7 +138,7 @@ namespace UserInterfaceWindows
             this.m_Player2Name.Name = "m_Player2Name";
             this.m_Player2Name.Size = new System.Drawing.Size(100, 26);
             this.m_Player2Name.TabIndex = 5;
-            this.m_Player2Name.Text = "[Computer]";
+            this.m_Player2Name.Text = "Computer";
             // 
             // m_Players
             // 
@@ -252,7 +236,7 @@ namespace UserInterfaceWindows
             m_Player2Name.Enabled = !m_Player2Name.Enabled;
             if(m_Player2Name.Enabled == false)
             {
-                m_Player2Name.Text = "[Computer]";
+                m_Player2Name.Text = "Computer";
             }
         }
 
