@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using ReverseTicTacToeGame;
 using static ReverseTicTacToeGame.GameLogic.eGameState;
 
@@ -8,158 +7,124 @@ namespace UserInterfaceWindows
 {
     internal class GameManager
     {
-        private const char k_Circle = 'O';
-        private const char k_Cross = 'X';
-        private const char k_Empty = ' ';
-        private const char k_Player1Sign = k_Cross;
-        private const char k_Player2Sign = k_Circle;
-        private int m_BoardSize;
-        string m_Player1Name;
-        string m_Player2Name;
-        private const bool k_Player1IsComputer = false;
-        private bool m_Player2IsComputer;
-        private GameLogic m_Game;
-        private StartGameForm m_SettingsForm;
-        private GameBoardForm m_gameBoardForm;
+        private readonly int r_BoardSize;
+        private readonly string r_Player1Name;
+        private readonly string r_Player2Name;
+        private readonly GameLogic r_Game;
+        private GameBoardForm m_GameBoardForm;
 
         internal GameManager(StartGameForm i_SettingsForm)
         {
-            m_SettingsForm = i_SettingsForm;
-            m_BoardSize  = (int)m_SettingsForm.NumberOfColsAndRows;
-            m_Player2IsComputer = !m_SettingsForm.IsComputerBox;
-            m_Game = new GameLogic(m_BoardSize, false, m_Player2IsComputer);
-            m_Player1Name = m_SettingsForm.Player1Name;
-            m_Player2Name = m_SettingsForm.Player2Name;
-            this.InitGameBoardForm();
+            r_BoardSize = (int)i_SettingsForm.NumberOfColsAndRows;
+            bool player2IsComputer = !i_SettingsForm.IsComputerBox;
+            r_Game = new GameLogic(r_BoardSize, false, player2IsComputer);
+            r_Player1Name = i_SettingsForm.Player1Name;
+            r_Player2Name = i_SettingsForm.Player2Name;
+            this.initGameBoardForm();
         }
 
         public String Player1Name
         {
-            get { return m_Player1Name; }
+            get { return r_Player1Name; }
         }
         public String Player2Name
         {
-            get { return m_Player2Name; }
+            get { return r_Player2Name; }
         }
 
         private void reportNewPoint((int row, int column) i_Arg1, ePlayersMark i_Arg2)
         {
-            m_gameBoardForm.setPoint(i_Arg1, i_Arg2);
-
+            m_GameBoardForm.SetPoint(i_Arg1, i_Arg2);
         }
 
-     
-        private void InitGameBoardForm()
+        private void initGameBoardForm()
         {
-            m_gameBoardForm = new GameBoardForm(m_BoardSize ,this);
-            m_Game.GameBoard.m_ReportNewPointDelegates += this.reportNewPoint;
+            m_GameBoardForm = new GameBoardForm(r_BoardSize, this);
+            r_Game.GameBoard.ReportNewPointDelegates += this.reportNewPoint;
 
-            m_gameBoardForm.ShowDialog();
-
+            m_GameBoardForm.ShowDialog();
         }
 
-        // private void startGame() // Checked
-        // {
-        //     bool wantAnotherGameFlag = true;
-        //
-        //     while (wantAnotherGameFlag)
-        //     {
-        //         while (this.m_Game.CurrentGameState == GameLogic.eGameState.Playing)
-        //         {
-        //          //  this.m_Game.OneRoundInGame();
-        //         }
-        //
-        //         updateTheUserInterfaceAccordingTheState();
-        //         wantAnotherGameFlag = isUserWantAnotherGame();
-        //     }
-        // }
-        // /// <summary>
-        // /// chaeck by ui ig User Want another game
-        // /// </summary>
-        // /// <returns></returns>
         private bool isUserWantAnotherGame()
         {
-           return m_gameBoardForm.isWantAnotherGame();
-
+            return m_GameBoardForm.IsWantAnotherGame();
         }
 
         private void updateTheUserInterfaceAccordingTheState()
         {
-            GameLogic.eGameState currentState = this.m_Game.CurrentGameState;
-            ePlayersMark signOfTheWinner = this.m_Game.WinnerPlayer.Sign;
-            String winnerName = signOfTheWinner == ePlayersMark.Player1 ? m_Player1Name : m_Player2Name;
+            GameLogic.eGameState currentState = this.r_Game.CurrentGameState;
+            ePlayersMark signOfTheWinner = this.r_Game.WinnerPlayer.Sign;
+            string winnerName = signOfTheWinner == ePlayersMark.Player1 ? r_Player1Name : r_Player2Name;
 
+            switch(currentState)
+            {
+                case Win:
+                    winMessage(signOfTheWinner, winnerName);
 
-            if (currentState.Equals(Win))
-            {
-                winMessage(signOfTheWinner,winnerName);
-            }
-            else if (currentState == Tie)
-            {
-                tieMessage();
-            }
-            else if (currentState == Quit)
-            {
-                quitMessage(signOfTheWinner, winnerName);
+                    break;
+                case Tie:
+                    tieMessage();
+
+                    break;
+                case Quit:
+                    quitMessage(signOfTheWinner, winnerName);
+
+                    break;
             }
 
             if(isUserWantAnotherGame())
             {
-                InitGameBoardForm();
+                initGameBoardForm();
             }
-
         }
 
         private void tieMessage() // Checked
         {
-            m_gameBoardForm.showTieMessage();
-
+            m_GameBoardForm.ShowTieMessage();
         }
 
         private void winMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
         {
-            m_gameBoardForm.showWinMessage(i_SignOfTheWinner, i_WinnerName);
-
+            m_GameBoardForm.ShowWinMessage(i_SignOfTheWinner, i_WinnerName);
         }
 
         private void quitMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
         {
-            m_gameBoardForm.showQuitMessage(i_SignOfTheWinner, i_WinnerName);
-
+            m_GameBoardForm.ShowQuitMessage(i_SignOfTheWinner, i_WinnerName);
         }
 
         public void ValidPointFromUser((int row, int col) i_Point)
         {
-            m_Game.OneRoundInGame(i_Point);
-            if(this.m_Game.CurrentGameState != GameLogic.eGameState.Playing)
+            r_Game.OneRoundInGame(i_Point);
+            if(this.r_Game.CurrentGameState != GameLogic.eGameState.Playing)
             {
                 updateTheUserInterfaceAccordingTheState();
-
             }
-            
         }
 
-        public int getNumberOfWinPlayer1()
+        public int GetNumberOfWinPlayer1()
         {
-            return m_Game.Player1.NumberOfWins;
+            return r_Game.Player1.NumberOfWins;
         }
-        public int getNumberOfWinPlayer2()
+
+        public int GetNumberOfWinPlayer2()
         {
-            return m_Game.Player2.NumberOfWins;
+            return r_Game.Player2.NumberOfWins;
         }
-        public static int getValidMaxSizeOfBoard()
+
+        public static int GetValidMaxSizeOfBoard()
         {
             return GameLogic.MaxBoardSize;
         }
-        
-        public static int getValidMinSizeOfBoard()
+
+        public static int GetValidMinSizeOfBoard()
         {
             return GameLogic.MinBoardSize;
         }
 
-        internal void makeNewGame()
+        internal void MakeNewGame()
         {
-            this.m_Game.PreparingForAnotherGame();
+            this.r_Game.PreparingForAnotherGame();
         }
     }
 }

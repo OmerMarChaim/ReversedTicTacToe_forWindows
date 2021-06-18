@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 
-
 namespace ReverseTicTacToeGame
 {
     public class GameLogic
@@ -14,7 +13,7 @@ namespace ReverseTicTacToeGame
         private const int k_MinBoardSize = 4;
         private const int k_MaxBoardSize = 10;
         private Random m_Random;
-        private Player m_currentPlayer;
+        private Player m_CurrentPlayer;
 
         public enum eGameState
         {
@@ -30,16 +29,8 @@ namespace ReverseTicTacToeGame
             m_Player1 = new Player(ePlayersMark.Player1, i_Player1IsComputer);
             m_Player2 = new Player(ePlayersMark.Player2, i_Player2IsComputer);
             m_CurrentGameState = eGameState.Playing;
-            m_currentPlayer = m_Player1;
-        //    m_GameBoard.m_ReportNewPointDelegates += this.reportNewPoint;
+            m_CurrentPlayer = m_Player1;
         }
-
-        private void reportNewPoint((int row, int column) i_Arg1, ePlayersMark i_Arg2)
-        {
-       //    m_1ReportNewPointDelegates.Invoke(i_Arg1,i_Arg2);
-        }
-
-    
 
         public eGameState CurrentGameState
         {
@@ -76,24 +67,23 @@ namespace ReverseTicTacToeGame
             get { return k_MinBoardSize; }
         }
 
-
         public void OneRoundInGame((int row, int column) i_Point)
         {
             for(int i = 0; i < 2; i++)
             {
                 // i_Point = i_GameUi.GetValidPointFromUser(player.Sign); // the slot is in range and free   
-                if(m_currentPlayer.IsComputer)
+                if(m_CurrentPlayer.IsComputer)
                 {
                     i_Point = getRandomPointForComputer();
                 }
 
-                this.GameBoard.SetValueOnBoard(i_Point.row, i_Point.column, m_currentPlayer.Sign);
-               
-                updateStateOfGame(i_Point, m_currentPlayer);
+                this.GameBoard.SetValueOnBoard(i_Point.row, i_Point.column, m_CurrentPlayer.Sign);
+
+                updateStateOfGame(i_Point, m_CurrentPlayer);
                 //Report to Form
                 // i_GameUi.CleanAndShowBeforeNewTurn();
-                m_currentPlayer = m_currentPlayer.Equals(m_Player1) ? m_Player2 : m_Player1;
-                if(m_CurrentGameState != eGameState.Playing || !m_currentPlayer.IsComputer)
+                m_CurrentPlayer = m_CurrentPlayer.Equals(m_Player1) ? m_Player2 : m_Player1;
+                if(m_CurrentGameState != eGameState.Playing || !m_CurrentPlayer.IsComputer)
                 {
                     break;
                 }
@@ -153,13 +143,13 @@ namespace ReverseTicTacToeGame
         private void createNewBoardForAnotherGame()
         {
             int boardSize = this.GameBoard.Size;
-            this.m_currentPlayer = m_Player1;
+            this.m_CurrentPlayer = m_Player1;
             this.m_GameBoard = new Board(boardSize);
         }
 
         private bool thereIsWin((int row, int column) i_Point, ePlayersMark i_PlayerMarkSign)
         {
-            int numberOfSignsToWin = this.GameBoard.Size ;
+            int numberOfSignsToWin = this.GameBoard.Size;
             bool isWinInRowAndCol = checkWinInRowAndColumn(i_Point, i_PlayerMarkSign, numberOfSignsToWin);
             bool isWinInDiagonal = checkWinInMainDiagonal(i_PlayerMarkSign, numberOfSignsToWin);
             bool isWinInAntiDiagonal = checkWinInAntiDiagonal(i_PlayerMarkSign, numberOfSignsToWin);
@@ -175,7 +165,7 @@ namespace ReverseTicTacToeGame
 
             for(int i = 0; i < this.GameBoard.Size; i++)
             {
-                if(m_GameBoard.GameBoard[i, m_GameBoard.Size - i -1] == i_PlayerMarkSign)
+                if(m_GameBoard.GameBoard[i, m_GameBoard.Size - i - 1] == i_PlayerMarkSign)
                 {
                     counter++;
                 }
