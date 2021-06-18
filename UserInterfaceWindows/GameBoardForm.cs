@@ -75,8 +75,8 @@ namespace UserInterfaceWindows
             // 
             this.m_LabelPlayer1Score.AutoSize = true;
             this.m_LabelPlayer1Score.Location = new Point(
-                r_ButtonsTable[(m_Size - 1) / 2 - 1, 0].Bottom,
-                r_ButtonsTable[m_Size - 1, 0].Bottom);
+                    r_ButtonsTable[(m_Size) / 2 - 2, 0].Bottom,
+                    r_ButtonsTable[m_Size - 1, 0].Bottom);
             this.m_LabelPlayer1Score.Name = "m_LabelPlayer1Score";
             this.m_LabelPlayer1Score.Padding = new Padding(5);
             this.m_LabelPlayer1Score.Size = new Size(79, 30);
@@ -109,20 +109,24 @@ namespace UserInterfaceWindows
 
         internal void ShowTieMessage()
         {
-            MessageBox.Show("No one is going to win this game, there's a tie! This game is over without winner.");
+            MessageBox.Show($"No one is going to win this game, there's a tie! This game is over without winner.", "Tie!");
         }
 
         internal void ShowWinMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
         {
+
             MessageBox.Show(
-                $@"There is a win! The winner in this round is : {i_WinnerName} ! Who play with {(Char)i_SignOfTheWinner}");
+                $@"There is a win!
+The winner in this round is {i_WinnerName}!
+Who played with {(Char)i_SignOfTheWinner}", "Win!");
         }
 
         internal void ShowQuitMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
         {
             MessageBox.Show(
-                $@"You Quit from the Game! The winner in this round is : {i_WinnerName} ! Who play with {(Char)i_SignOfTheWinner}
-See YOU next Semester");
+                $@"You Quit from the Game! The winner in this round is :
+        {i_WinnerName} ! Who play with {(Char)i_SignOfTheWinner}
+        See YOU next Semester");
             this.Close();
         }
 
@@ -136,7 +140,7 @@ See YOU next Semester");
             DialogResult resultFromUser = MessageBox.Show(message, title, buttons);
             if(resultFromUser == DialogResult.No)
             {
-                MessageBox.Show("Thank you for playing with us! see you next Time ( or semester ;) )");
+                MessageBox.Show("Thank you for playing with us! see you next Semester ;) ","Goodbye");
                 this.Close();
                 isWantAnother = false;
             }
