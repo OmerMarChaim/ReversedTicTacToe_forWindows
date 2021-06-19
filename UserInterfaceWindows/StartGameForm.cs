@@ -236,9 +236,5 @@ namespace UserInterfaceWindows
             }
         }
 
-        public void CloseWindow()
-        {
-            this.Close();
-        }
     }
 }

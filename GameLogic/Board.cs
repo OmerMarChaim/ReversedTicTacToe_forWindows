@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ReverseTicTacToeGame
+namespace GameLogic
 {
     public class Board
     {

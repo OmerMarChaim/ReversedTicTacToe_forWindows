@@ -1,5 +1,5 @@
-﻿using ReverseTicTacToeGame;
-using static ReverseTicTacToeGame.GameLogic.eGameState;
+﻿using GameLogic;
+using static GameLogic.GameLogic.eGameState;
 
 namespace UserInterfaceWindows
 
@@ -11,14 +11,14 @@ namespace UserInterfaceWindows
         private readonly int r_BoardSize;
         private readonly string r_Player1Name;
         private readonly string r_Player2Name;
-        private readonly GameLogic r_Game;
+        private readonly GameLogic.GameLogic r_Game;
         private GameBoardForm m_GameBoardForm;
 
         internal GameManager(StartGameForm i_SettingsForm)
         {
             r_BoardSize = (int)i_SettingsForm.NumberOfColsAndRows;
             bool player2IsComputer = !i_SettingsForm.IsComputerBox;
-            r_Game = new GameLogic(r_BoardSize, false, player2IsComputer);
+            r_Game = new GameLogic.GameLogic(r_BoardSize, false, player2IsComputer);
             r_Player1Name = i_SettingsForm.Player1Name;
             r_Player2Name = i_SettingsForm.Player2Name;
             r_Game.GameOver += this.showGameOverStatus;
@@ -48,14 +48,13 @@ namespace UserInterfaceWindows
 
         private void showGameOverStatus(object sender, GameOverEventArgs e)
         {
-            GameLogic.eGameState currentState = e.GameState;
+            GameLogic.GameLogic.eGameState currentState = e.GameState;
             ePlayersMark signOfTheWinner = e.WinnerPlayer.Sign;
             string winnerName = signOfTheWinner == ePlayersMark.Player1 ? r_Player1Name : r_Player2Name;
 
             switch (currentState)
             {
                 case Win:
-                 //   winMessage(signOfTheWinner, winnerName);
                     m_GameBoardForm.ShowWinMessage(signOfTheWinner, winnerName);
 
                     break;
@@ -64,7 +63,6 @@ namespace UserInterfaceWindows
 
                     break;
                 case Quit:
-                 //   quitMessage(signOfTheWinner, winnerName);
                     m_GameBoardForm.ShowQuitMessage(signOfTheWinner, winnerName);
 
                     break;
@@ -82,21 +80,7 @@ namespace UserInterfaceWindows
             return m_GameBoardForm.IsWantAnotherGame();
         }
 
-        private void tieMessage() // Checked
-        {
-            m_GameBoardForm.ShowTieMessage();
-        }
-
-        private void winMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
-        {
-            m_GameBoardForm.ShowWinMessage(i_SignOfTheWinner, i_WinnerName);
-        }
-
-        private void quitMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
-        {
-            m_GameBoardForm.ShowQuitMessage(i_SignOfTheWinner, i_WinnerName);
-        }
-
+        
         public void ValidPointFromUser((int row, int col) i_Point)
         {
             r_Game.OneRoundInGame(i_Point);
@@ -114,12 +98,12 @@ namespace UserInterfaceWindows
 
         public static int GetValidMaxSizeOfBoard()
         {
-            return GameLogic.MaxBoardSize;
+            return GameLogic.GameLogic.MaxBoardSize;
         }
 
         public static int GetValidMinSizeOfBoard()
         {
-            return GameLogic.MinBoardSize;
+            return GameLogic.GameLogic.MinBoardSize;
         }
 
         internal void MakeNewGame()

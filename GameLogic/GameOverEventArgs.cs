@@ -1,13 +1,12 @@
 ﻿using System;
-using ReverseTicTacToeGame;
 
-namespace UserInterfaceWindows
+namespace GameLogic
 {
     public class GameOverEventArgs :EventArgs
     {
         private GameLogic.eGameState m_GameState;
         private Player m_WinnerPlayer;
-        public GameOverEventArgs(  GameLogic.eGameState i_GameState, Player i_WinnerPlayer)
+        public GameOverEventArgs( GameLogic.eGameState i_GameState, Player i_WinnerPlayer)
         {
             m_GameState = i_GameState;
             m_WinnerPlayer = i_WinnerPlayer;

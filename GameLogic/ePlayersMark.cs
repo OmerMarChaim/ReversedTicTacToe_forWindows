@@ -1,4 +1,4 @@
-﻿namespace ReverseTicTacToeGame
+﻿namespace GameLogic
 {
     public enum ePlayersMark
     {

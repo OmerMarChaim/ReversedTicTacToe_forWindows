@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-using UserInterfaceWindows;
 
-namespace ReverseTicTacToeGame
+namespace GameLogic
 {
     public delegate void GameOverEventHandler(object sender, GameOverEventArgs e);
 
@@ -248,7 +247,7 @@ namespace ReverseTicTacToeGame
             return (counterRow == i_NumberOfSignsToWin) || (counterColumn == i_NumberOfSignsToWin);
         }
 
-        /* Tie happened when the board is full and a win didnt cause */
+        /* Tie happened when the board is full and a win didn't cause */
         private bool thereIsTie()
         {
             return this.GameBoard.IsFull();
