@@ -7,12 +7,12 @@ using System.Windows.Forms;
 
 namespace UserInterfaceWindows
 {
-    class ButtonInMetrix :Button
+    class ButtonInMatrix :Button
     {
 
         private int m_RowNumber;
         private int m_ColNumber;
-        public ButtonInMetrix(int i_RowNumber, int i_ColNumber)
+        public ButtonInMatrix(int i_RowNumber, int i_ColNumber)
         {
             m_RowNumber = i_RowNumber;
             m_ColNumber = i_ColNumber;

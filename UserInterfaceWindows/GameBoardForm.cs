@@ -8,14 +8,14 @@ namespace UserInterfaceWindows
     class GameBoardForm : Form
     {
         private readonly int r_Size;
-        private readonly ButtonInMetrix[,] r_ButtonsTable;
+        private readonly ButtonInMatrix[,] r_ButtonsTable;
         private Label m_LabelPlayersScore;
         private GameManager m_GameManager;
 
         public GameBoardForm(int i_Size, GameManager i_GameManager)
         {
             r_Size = i_Size;
-            r_ButtonsTable = new ButtonInMetrix[r_Size, r_Size];
+            r_ButtonsTable = new ButtonInMatrix[r_Size, r_Size];
             m_GameManager = i_GameManager;
 
             initButtonsTableButton();
@@ -34,7 +34,7 @@ namespace UserInterfaceWindows
             {
                 for(int j = 0; j < r_Size; j++)
                 {
-                    ButtonInMetrix newButton = initNewButton(wantedLeft, wantedTop, i, j);
+                    ButtonInMatrix newButton = initNewButton(wantedLeft, wantedTop, i, j);
                     wantedLeft = newButton.Left + 55;
                     r_ButtonsTable[i, j] = newButton;
                 }
@@ -44,9 +44,9 @@ namespace UserInterfaceWindows
             }
         }
 
-        private ButtonInMetrix initNewButton(int i_WantedLeft, int i_WantedTop, int i_RowNumber, int i_ColNumber)
+        private ButtonInMatrix initNewButton(int i_WantedLeft, int i_WantedTop, int i_RowNumber, int i_ColNumber)
         {
-            ButtonInMetrix newButton = new ButtonInMetrix(i_RowNumber, i_ColNumber);
+            ButtonInMatrix newButton = new ButtonInMatrix(i_RowNumber, i_ColNumber);
             newButton.Size = new Size(50, 50);
             newButton.Left = i_WantedLeft;
             newButton.Top = i_WantedTop;
@@ -58,8 +58,8 @@ namespace UserInterfaceWindows
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            int rowNumber = (sender as ButtonInMetrix).RowNumber;
-            int colNumber = (sender as ButtonInMetrix).ColNumber;
+            int rowNumber = (sender as ButtonInMatrix).RowNumber;
+            int colNumber = (sender as ButtonInMatrix).ColNumber;
             (int row, int col) newPoint = (rowNumber, colNumber);
             m_GameManager.ValidPointFromUser(newPoint);
         }

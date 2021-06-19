@@ -1,5 +1,4 @@
-﻿using System;
-using ReverseTicTacToeGame;
+﻿using ReverseTicTacToeGame;
 using static ReverseTicTacToeGame.GameLogic.eGameState;
 
 namespace UserInterfaceWindows
