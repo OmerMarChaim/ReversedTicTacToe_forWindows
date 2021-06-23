@@ -45,8 +45,16 @@ namespace UserInterfaceWindows
             r_MaxSizeOfBoard = GameManager.GetValidMaxSizeOfBoard();
             r_MinSizeOfBoard = GameManager.GetValidMinSizeOfBoard();
             InitializeComponent();
-
+            updateComponents();
             //action when start button press -> need to init game
+        }
+
+        private void updateComponents()
+        {
+            this.m_ColsNumericUpDown.Maximum = r_MaxSizeOfBoard;
+            this.m_ColsNumericUpDown.Minimum = r_MinSizeOfBoard;
+            this.m_RowsNumericUpDown.Maximum = r_MaxSizeOfBoard;
+            this.m_RowsNumericUpDown.Minimum = r_MinSizeOfBoard;
         }
 
         // ReSharper disable once InconsistentNaming
@@ -96,8 +104,7 @@ namespace UserInterfaceWindows
             // 
             this.m_ColsNumericUpDown.AutoSize = true;
             this.m_ColsNumericUpDown.Location = new System.Drawing.Point(89, 131);
-            this.m_ColsNumericUpDown.Maximum = r_MaxSizeOfBoard;
-            this.m_ColsNumericUpDown.Minimum = r_MinSizeOfBoard;
+            
             this.m_ColsNumericUpDown.Name = "m_ColsNumericUpDown";
             this.m_ColsNumericUpDown.Size = new System.Drawing.Size(51, 26);
             this.m_ColsNumericUpDown.TabIndex = 3;
@@ -108,8 +115,7 @@ namespace UserInterfaceWindows
             // 
             this.m_RowsNumericUpDown.AutoSize = true;
             this.m_RowsNumericUpDown.Location = new System.Drawing.Point(196, 131);
-            this.m_RowsNumericUpDown.Maximum = r_MaxSizeOfBoard;
-            this.m_RowsNumericUpDown.Minimum = r_MinSizeOfBoard;
+       
             this.m_RowsNumericUpDown.Name = "m_RowsNumericUpDown";
             this.m_RowsNumericUpDown.Size = new System.Drawing.Size(51, 26);
             this.m_RowsNumericUpDown.TabIndex = 4;

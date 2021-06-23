@@ -10,7 +10,9 @@ namespace UserInterfaceWindows
         private readonly int r_Size;
         private readonly ButtonInMatrix[,] r_ButtonsTable;
         private Label m_LabelPlayersScore;
-        private GameManager m_GameManager;
+        private Label m_LabelPlayersScore1;
+        private readonly string r_Player2Name;
+        private readonly GameManager m_GameManager;
 
         public GameBoardForm(int i_Size, GameManager i_GameManager)
         {
@@ -18,12 +20,24 @@ namespace UserInterfaceWindows
             r_ButtonsTable = new ButtonInMatrix[r_Size, r_Size];
             m_GameManager = i_GameManager;
 
+            r_Player2Name = m_GameManager.Player2isComputer ? "Computer" : "Player 1";
             initButtonsTableButton();
             InitializeComponent();
+            updateComponents();
+        }
 
-            this.Text = "Reverse Tic Tac Toe";
-            this.Name = "GameBoardForm";
-            this.StartPosition = FormStartPosition.CenterScreen;
+        private void updateComponents()
+        {
+            this.m_LabelPlayersScore.Location = new Point(
+                r_ButtonsTable[r_Size / 2, 0].Right,
+                r_ButtonsTable[r_Size - 1, 0].Bottom);
+            this.m_LabelPlayersScore.Text =
+                $@"Player 1 : {m_GameManager.GetNumberOfWinPlayer1()} ";
+
+            this.m_LabelPlayersScore1.Left = m_LabelPlayersScore.Right + 10;
+            this.m_LabelPlayersScore1.Top = m_LabelPlayersScore.Top;
+            this.m_LabelPlayersScore1.Text =
+                $@"{r_Player2Name} : {m_GameManager.GetNumberOfWinPlayer2()} ";
         }
 
         private void initButtonsTableButton()
@@ -69,20 +83,28 @@ namespace UserInterfaceWindows
         private void InitializeComponent()
         {
             this.m_LabelPlayersScore = new Label();
+            this.m_LabelPlayersScore1 = new Label();
+
             this.SuspendLayout();
+
             // 
-            // labelPlayer1Score
+            // LabelPlayersScore
             // 
             this.m_LabelPlayersScore.AutoSize = true;
-            this.m_LabelPlayersScore.Location = new Point(
-                    r_ButtonsTable[(r_Size) / 2 - 2, 0].Bottom,
-                    r_ButtonsTable[r_Size - 1, 0].Bottom);
             this.m_LabelPlayersScore.Name = "m_LabelPlayersScore";
             this.m_LabelPlayersScore.Padding = new Padding(5);
             this.m_LabelPlayersScore.Size = new Size(79, 30);
             this.m_LabelPlayersScore.TabIndex = 8;
-            this.m_LabelPlayersScore.Text =
-                $@"{m_GameManager.Player1Name} : {m_GameManager.GetNumberOfWinPlayer1()}      {m_GameManager.Player2Name} : {m_GameManager.GetNumberOfWinPlayer2()} ";
+            this.m_LabelPlayersScore.Font = new Font(m_LabelPlayersScore.Font, FontStyle.Bold);
+            //{m_GameManager.Player1Name} 
+            // 
+            // LabelPlayersScore
+            // 
+            this.m_LabelPlayersScore1.AutoSize = true;
+            this.m_LabelPlayersScore1.Name = "m_LabelPlayersScore";
+            this.m_LabelPlayersScore1.Padding = new Padding(5);
+            this.m_LabelPlayersScore1.Size = new Size(79, 30);
+            this.m_LabelPlayersScore1.TabIndex = 8;
 
             // 
             // GameBoardForm
@@ -90,12 +112,28 @@ namespace UserInterfaceWindows
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new Size(r_ButtonsTable[0,r_Size-1].Right+20, m_LabelPlayersScore.Bottom + 20);
+            this.ClientSize = new Size(m_LabelPlayersScore1.Right+20, m_LabelPlayersScore1.Bottom + 20);
             this.Controls.Add(this.m_LabelPlayersScore);
+            this.Controls.Add(this.m_LabelPlayersScore1);
+
             this.Name = "GameBoardForm";
             this.StartPosition = FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.MinimizeBox = false;
+            this.MaximizeBox = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Text = "Reverse Tic Tac Toe";
+            this.FormClosed += GameBoardForm_FormClosed;
+         
+        }
+
+        private void GameBoardForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(e.CloseReason.Equals(CloseReason.UserClosing))
+            {
+                m_GameManager.ValidPointFromUser(m_GameManager.QuitPoint);
+            }
         }
 
         internal void SetPoint((int row, int column) i_SelectedPoint, ePlayersMark i_PlayerSign)
@@ -109,7 +147,7 @@ namespace UserInterfaceWindows
 
         internal void ShowTieMessage()
         {
-            MessageBox.Show($"No one is going to win this game, there's a tie! This game is over without winner.", "Tie!");
+            MessageBox.Show("No one is going to win this game, there's a tie! This game is over without winner.", "Tie!");
         }
 
         internal void ShowWinMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
@@ -117,31 +155,34 @@ namespace UserInterfaceWindows
 
             MessageBox.Show(
                 $@"There is a win!
-The winner in this round is {i_WinnerName}!
-Who played with {(Char)i_SignOfTheWinner}", "Win!");
+The winner in this round is :
+    {i_WinnerName} ! Who played with {(Char)i_SignOfTheWinner}", "Win!");
         }
 
-        internal void ShowQuitMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName)
+        internal void ShowQuitMessage(ePlayersMark i_SignOfTheWinner, string i_WinnerName, string i_LoserName)
         {
             MessageBox.Show(
-                $@"You Quit from the Game! The winner in this round is :
-        {i_WinnerName} ! Who play with {(Char)i_SignOfTheWinner}
-        See YOU next Semester");
-            this.Close();
+                $@"{i_LoserName} Quit from the Game! The winner in this round is :
+    {i_WinnerName} ! Who play with {(Char)i_SignOfTheWinner}");
         }
 
         internal bool IsWantAnotherGame()
         {
             bool isWantAnother;
-            string message = "Do you want to play another game?";
-            string title = "Another Game";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            const string wantAnotherGameMessage = "Do you want to play another game?";
+            const string wantAnotherGameTitle = "Another Game";
+            const MessageBoxButtons buttons = MessageBoxButtons.YesNo;
 
-            DialogResult resultFromUser = MessageBox.Show(message, title, buttons);
+            DialogResult resultFromUser = MessageBox.Show(wantAnotherGameMessage, wantAnotherGameTitle, buttons);
             if(resultFromUser == DialogResult.No)
             {
-                MessageBox.Show("Thank you for playing with us! see you next Semester ;) ","Goodbye");
-                this.Close();
+                string finalResult = $@"{m_GameManager.Player1Name} : {m_GameManager.GetNumberOfWinPlayer1()}  {m_GameManager.Player2Name} : {m_GameManager.GetNumberOfWinPlayer2()} ";
+
+                MessageBox.Show($@"Thank you for playing with us! 
+the final Result is :
+{finalResult}
+see you next Semester ;) ","Goodbye");
+                this.Hide();
                 isWantAnother = false;
             }
             else
@@ -152,6 +193,20 @@ Who played with {(Char)i_SignOfTheWinner}", "Win!");
             }
 
             return isWantAnother;
+        }
+
+        public void ChangeCurrentPlayer(bool i_Is1CurrentPlayer)
+        {
+            if(i_Is1CurrentPlayer)
+            {
+                this.m_LabelPlayersScore.Font = new Font(m_LabelPlayersScore.Font, FontStyle.Bold);
+                this.m_LabelPlayersScore1.Font = new Font(m_LabelPlayersScore.Font, FontStyle.Regular);
+            }
+            else
+            {
+                this.m_LabelPlayersScore1.Font = new Font(m_LabelPlayersScore.Font, FontStyle.Bold);
+                this.m_LabelPlayersScore.Font = new Font(m_LabelPlayersScore.Font, FontStyle.Regular);
+            }
         }
     }
 }

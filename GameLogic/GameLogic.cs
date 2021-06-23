@@ -5,8 +5,11 @@ namespace GameLogic
 {
     public delegate void GameOverEventHandler(object sender, GameOverEventArgs e);
 
+
     public class GameLogic
     {
+        public event Action<Player> ReportChangePlayerDelegates;
+
         public event GameOverEventHandler GameOver;
         private Board m_GameBoard;
         private Player m_Player1;
@@ -87,7 +90,8 @@ namespace GameLogic
                 //Report to Form
                 // i_GameUi.CleanAndShowBeforeNewTurn();
                 m_CurrentPlayer = m_CurrentPlayer.Equals(m_Player1) ? m_Player2 : m_Player1;
-                if(m_CurrentGameState != eGameState.Playing )
+                ReportChangePlayerDelegates?.Invoke(m_CurrentPlayer);
+                if (m_CurrentGameState != eGameState.Playing )
                 {
                     notifyGameOverListener(m_CurrentGameState, m_WinnerPlayer);
                     break;
