@@ -9,9 +9,8 @@ namespace UserInterfaceWindows
     {
         private readonly int r_Size;
         private readonly ButtonInMatrix[,] r_ButtonsTable;
-        private Label m_LabelPlayersScore;
-        private Label m_LabelPlayersScore1;
-        private readonly string r_Player2Name;
+        private Label m_LabelPlayer1Score;
+        private Label m_LabelPlayer2Score;
         private readonly GameManager m_GameManager;
 
         public GameBoardForm(int i_Size, GameManager i_GameManager)
@@ -20,7 +19,6 @@ namespace UserInterfaceWindows
             r_ButtonsTable = new ButtonInMatrix[r_Size, r_Size];
             m_GameManager = i_GameManager;
 
-            r_Player2Name = m_GameManager.Player2isComputer ? "Computer" : "Player 1";
             initButtonsTableButton();
             InitializeComponent();
             updateComponents();
@@ -28,16 +26,16 @@ namespace UserInterfaceWindows
 
         private void updateComponents()
         {
-            this.m_LabelPlayersScore.Location = new Point(
+            this.m_LabelPlayer1Score.Location = new Point(
                 r_ButtonsTable[r_Size / 2, 0].Right,
                 r_ButtonsTable[r_Size - 1, 0].Bottom);
-            this.m_LabelPlayersScore.Text =
-                $@"Player 1 : {m_GameManager.GetNumberOfWinPlayer1()} ";
+            this.m_LabelPlayer1Score.Text =
+                $@"{m_GameManager.Player1Name} : {m_GameManager.GetNumberOfWinPlayer1()} ";
 
-            this.m_LabelPlayersScore1.Left = m_LabelPlayersScore.Right + 10;
-            this.m_LabelPlayersScore1.Top = m_LabelPlayersScore.Top;
-            this.m_LabelPlayersScore1.Text =
-                $@"{r_Player2Name} : {m_GameManager.GetNumberOfWinPlayer2()} ";
+            this.m_LabelPlayer2Score.Left = m_LabelPlayer1Score.Right + 10;
+            this.m_LabelPlayer2Score.Top = m_LabelPlayer1Score.Top;
+            this.m_LabelPlayer2Score.Text =
+                $@"{m_GameManager.Player2Name} : {m_GameManager.GetNumberOfWinPlayer2()} ";
         }
 
         private void initButtonsTableButton()
@@ -82,29 +80,29 @@ namespace UserInterfaceWindows
         // ReSharper disable once InconsistentNaming
         private void InitializeComponent()
         {
-            this.m_LabelPlayersScore = new Label();
-            this.m_LabelPlayersScore1 = new Label();
+            this.m_LabelPlayer1Score = new Label();
+            this.m_LabelPlayer2Score = new Label();
 
             this.SuspendLayout();
 
             // 
             // LabelPlayersScore
             // 
-            this.m_LabelPlayersScore.AutoSize = true;
-            this.m_LabelPlayersScore.Name = "m_LabelPlayersScore";
-            this.m_LabelPlayersScore.Padding = new Padding(5);
-            this.m_LabelPlayersScore.Size = new Size(79, 30);
-            this.m_LabelPlayersScore.TabIndex = 8;
-            this.m_LabelPlayersScore.Font = new Font(m_LabelPlayersScore.Font, FontStyle.Bold);
+            this.m_LabelPlayer1Score.AutoSize = true;
+            this.m_LabelPlayer1Score.Name = "m_LabelPlayer1Score";
+            this.m_LabelPlayer1Score.Padding = new Padding(5);
+            this.m_LabelPlayer1Score.Size = new Size(79, 30);
+            this.m_LabelPlayer1Score.TabIndex = 8;
+            this.m_LabelPlayer1Score.Font = new Font(m_LabelPlayer1Score.Font, FontStyle.Bold);
             //{m_GameManager.Player1Name} 
             // 
             // LabelPlayersScore
             // 
-            this.m_LabelPlayersScore1.AutoSize = true;
-            this.m_LabelPlayersScore1.Name = "m_LabelPlayersScore";
-            this.m_LabelPlayersScore1.Padding = new Padding(5);
-            this.m_LabelPlayersScore1.Size = new Size(79, 30);
-            this.m_LabelPlayersScore1.TabIndex = 8;
+            this.m_LabelPlayer2Score.AutoSize = true;
+            this.m_LabelPlayer2Score.Name = "m_LabelPlayer1Score";
+            this.m_LabelPlayer2Score.Padding = new Padding(5);
+            this.m_LabelPlayer2Score.Size = new Size(79, 30);
+            this.m_LabelPlayer2Score.TabIndex = 8;
 
             // 
             // GameBoardForm
@@ -112,9 +110,9 @@ namespace UserInterfaceWindows
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new Size(m_LabelPlayersScore1.Right+20, m_LabelPlayersScore1.Bottom + 20);
-            this.Controls.Add(this.m_LabelPlayersScore);
-            this.Controls.Add(this.m_LabelPlayersScore1);
+            this.ClientSize = new Size(m_LabelPlayer2Score.Right+20, m_LabelPlayer2Score.Bottom + 20);
+            this.Controls.Add(this.m_LabelPlayer1Score);
+            this.Controls.Add(this.m_LabelPlayer2Score);
 
             this.Name = "GameBoardForm";
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -199,13 +197,13 @@ see you next Semester ;) ","Goodbye");
         {
             if(i_Is1CurrentPlayer)
             {
-                this.m_LabelPlayersScore.Font = new Font(m_LabelPlayersScore.Font, FontStyle.Bold);
-                this.m_LabelPlayersScore1.Font = new Font(m_LabelPlayersScore.Font, FontStyle.Regular);
+                this.m_LabelPlayer1Score.Font = new Font(m_LabelPlayer1Score.Font, FontStyle.Bold);
+                this.m_LabelPlayer2Score.Font = new Font(m_LabelPlayer1Score.Font, FontStyle.Regular);
             }
             else
             {
-                this.m_LabelPlayersScore1.Font = new Font(m_LabelPlayersScore.Font, FontStyle.Bold);
-                this.m_LabelPlayersScore.Font = new Font(m_LabelPlayersScore.Font, FontStyle.Regular);
+                this.m_LabelPlayer2Score.Font = new Font(m_LabelPlayer1Score.Font, FontStyle.Bold);
+                this.m_LabelPlayer1Score.Font = new Font(m_LabelPlayer1Score.Font, FontStyle.Regular);
             }
         }
     }
