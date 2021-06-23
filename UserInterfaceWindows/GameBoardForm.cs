@@ -27,8 +27,9 @@ namespace UserInterfaceWindows
         private void updateComponents()
         {
             this.m_LabelPlayer1Score.Location = new Point(
-                r_ButtonsTable[r_Size / 2, 0].Right,
-                r_ButtonsTable[r_Size - 1, 0].Bottom);
+                  r_ButtonsTable[r_Size / 2, (r_Size / 2)-1].Left,
+                 r_ButtonsTable[r_Size - 1, 0].Bottom);
+              
             this.m_LabelPlayer1Score.Text =
                 $@"{m_GameManager.Player1Name} : {m_GameManager.GetNumberOfWinPlayer1()} ";
 
@@ -80,50 +81,47 @@ namespace UserInterfaceWindows
         // ReSharper disable once InconsistentNaming
         private void InitializeComponent()
         {
-            this.m_LabelPlayer1Score = new Label();
-            this.m_LabelPlayer2Score = new Label();
-
+            this.m_LabelPlayer1Score = new System.Windows.Forms.Label();
+            this.m_LabelPlayer2Score = new System.Windows.Forms.Label();
             this.SuspendLayout();
-
             // 
-            // LabelPlayersScore
+            // m_LabelPlayer1Score
             // 
             this.m_LabelPlayer1Score.AutoSize = true;
+            this.m_LabelPlayer1Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            this.m_LabelPlayer1Score.Location = new System.Drawing.Point(0, 0);
             this.m_LabelPlayer1Score.Name = "m_LabelPlayer1Score";
-            this.m_LabelPlayer1Score.Padding = new Padding(5);
-            this.m_LabelPlayer1Score.Size = new Size(79, 30);
+            this.m_LabelPlayer1Score.Padding = new System.Windows.Forms.Padding(5);
+            this.m_LabelPlayer1Score.Size = new System.Drawing.Size(10, 30);
             this.m_LabelPlayer1Score.TabIndex = 8;
-            this.m_LabelPlayer1Score.Font = new Font(m_LabelPlayer1Score.Font, FontStyle.Bold);
-            //{m_GameManager.Player1Name} 
             // 
-            // LabelPlayersScore
+            // m_LabelPlayer2Score
             // 
             this.m_LabelPlayer2Score.AutoSize = true;
-            this.m_LabelPlayer2Score.Name = "m_LabelPlayer1Score";
-            this.m_LabelPlayer2Score.Padding = new Padding(5);
-            this.m_LabelPlayer2Score.Size = new Size(79, 30);
+            this.m_LabelPlayer2Score.Location = new System.Drawing.Point(0, 0);
+            this.m_LabelPlayer2Score.Name = "m_LabelPlayer2Score";
+            this.m_LabelPlayer2Score.Padding = new System.Windows.Forms.Padding(5);
+            this.m_LabelPlayer2Score.Size = new System.Drawing.Size(10, 30);
             this.m_LabelPlayer2Score.TabIndex = 8;
-
             // 
             // GameBoardForm
             // 
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new Size(m_LabelPlayer2Score.Right+20, m_LabelPlayer2Score.Bottom + 20);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(368, 314);
             this.Controls.Add(this.m_LabelPlayer1Score);
             this.Controls.Add(this.m_LabelPlayer2Score);
-
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "GameBoardForm";
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormClosed += GameBoardForm_FormClosed;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Reverse Tic Tac Toe";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.MinimizeBox = false;
-            this.MaximizeBox = false;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Text = "Reverse Tic Tac Toe";
-            this.FormClosed += GameBoardForm_FormClosed;
-         
+
         }
 
         private void GameBoardForm_FormClosed(object sender, FormClosedEventArgs e)
