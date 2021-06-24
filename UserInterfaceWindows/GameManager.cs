@@ -96,7 +96,6 @@ namespace UserInterfaceWindows
             return m_GameBoardForm.IsWantAnotherGame();
         }
 
-        
         public void ValidPointFromUser((int row, int col) i_Point)
         {
             r_Game.OneRoundInGame(i_Point);

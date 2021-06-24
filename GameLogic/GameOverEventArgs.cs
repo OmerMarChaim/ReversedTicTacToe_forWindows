@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    public class GameOverEventArgs :EventArgs
+    public class GameOverEventArgs : EventArgs
     {
         private GameLogic.eGameState m_GameState;
         private Player m_WinnerPlayer;

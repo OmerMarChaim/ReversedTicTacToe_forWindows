@@ -90,7 +90,8 @@ namespace GameLogic
                 //Report to Form
                 // i_GameUi.CleanAndShowBeforeNewTurn();
                 m_CurrentPlayer = m_CurrentPlayer.Equals(m_Player1) ? m_Player2 : m_Player1;
-                ReportChangePlayerDelegates?.Invoke(m_CurrentPlayer);
+                notifyCurrentPlayer();
+            
                 if (m_CurrentGameState != eGameState.Playing )
                 {
                     notifyGameOverListener(m_CurrentGameState, m_WinnerPlayer);
@@ -104,7 +105,12 @@ namespace GameLogic
             }
         }
 
-        private void notifyGameOverListener(eGameState i_CurrentGameState, Player i_WinnerPlayer)
+        protected virtual void notifyCurrentPlayer()
+        {
+            ReportChangePlayerDelegates?.Invoke(m_CurrentPlayer);
+        }
+
+        protected virtual void notifyGameOverListener(eGameState i_CurrentGameState, Player i_WinnerPlayer)
         {
             if(m_GameOverArgs != null)
             {

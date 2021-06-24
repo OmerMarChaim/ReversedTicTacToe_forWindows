@@ -27,8 +27,6 @@ namespace GameLogic
             }
         }
 
-
-    
     public int Size
         {
             get { return r_Size; }
@@ -53,7 +51,7 @@ namespace GameLogic
             }
         }
 
-        private void notifyNewPointListener((int, int) i_NewPoint, ePlayersMark i_Symbol)
+        protected virtual void notifyNewPointListener((int, int) i_NewPoint, ePlayersMark i_Symbol)
         {
             ReportNewPointDelegates?.Invoke(i_NewPoint,i_Symbol);
         }
