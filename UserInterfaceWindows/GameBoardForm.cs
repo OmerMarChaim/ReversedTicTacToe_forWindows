@@ -27,7 +27,7 @@ namespace UserInterfaceWindows
         private void updateComponents()
         {
             this.m_LabelPlayer1Score.Location = new Point(
-                  r_ButtonsTable[r_Size / 2, (r_Size / 2)-1].Left,
+                  r_ButtonsTable[0, (r_Size / 2)-1].Left,
                  r_ButtonsTable[r_Size - 1, 0].Bottom);
               
             this.m_LabelPlayer1Score.Text =
@@ -134,7 +134,7 @@ namespace UserInterfaceWindows
 
         internal void SetPoint((int row, int column) i_SelectedPoint, ePlayersMark i_PlayerSign)
         {
-            String symbolText = i_PlayerSign == ePlayersMark.Player1 ? "X" : "O";
+            string symbolText = i_PlayerSign == ePlayersMark.Player1 ? "X" : "O";
             Color symbolColor = i_PlayerSign == ePlayersMark.Player1 ? Color.Red : Color.MistyRose;
             r_ButtonsTable[i_SelectedPoint.row, i_SelectedPoint.column].Text = symbolText;
             r_ButtonsTable[i_SelectedPoint.row, i_SelectedPoint.column].Enabled = false;
