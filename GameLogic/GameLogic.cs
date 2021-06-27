@@ -78,6 +78,7 @@ namespace GameLogic
             get { return k_MinBoardSize; }
         }
 
+         
         public void OneRoundInGame((int row, int column) i_Point)
         {
             for(int i = 0; i < 2; i++)
@@ -91,13 +92,12 @@ namespace GameLogic
 
                 updateStateOfGame(i_Point, m_CurrentPlayer);
                 //Report to Form
-                // i_GameUi.CleanAndShowBeforeNewTurn();
                 m_CurrentPlayer = m_CurrentPlayer.Equals(m_Player1) ? m_Player2 : m_Player1;
-                notifyCurrentPlayer();
+                NotifyCurrentPlayer();
             
                 if (m_CurrentGameState != eGameState.Playing )
                 {
-                    notifyGameOverListener(m_CurrentGameState, m_WinnerPlayer);
+                    NotifyGameOverListener(m_CurrentGameState, m_WinnerPlayer);
                     break;
 
                 }
@@ -108,12 +108,12 @@ namespace GameLogic
             }
         }
 
-        protected virtual void notifyCurrentPlayer()
+        protected virtual void NotifyCurrentPlayer()
         {
             ReportChangePlayerDelegates?.Invoke(m_CurrentPlayer);
         }
 
-        protected virtual void notifyGameOverListener(eGameState i_CurrentGameState, Player i_WinnerPlayer)
+        protected virtual void NotifyGameOverListener(eGameState i_CurrentGameState, Player i_WinnerPlayer)
         {
             if(m_GameOverArgs != null)
             {

@@ -49,11 +49,11 @@ namespace GameLogic
             {
                 m_Board[i_Row, i_Column] = i_Symbol;
                 r_FreeSpots.Remove((i_Row, i_Column));
-                notifyNewPointListener((i_Row, i_Column), i_Symbol);
+                NotifyNewPointListener((i_Row, i_Column), i_Symbol);
             }
         }
 
-        protected virtual void notifyNewPointListener((int, int) i_NewPoint, ePlayersMark i_Symbol)
+        protected virtual void NotifyNewPointListener((int, int) i_NewPoint, ePlayersMark i_Symbol)
         {
             ReportNewPointDelegates?.Invoke(i_NewPoint,i_Symbol);
         }

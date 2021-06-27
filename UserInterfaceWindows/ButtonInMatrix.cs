@@ -2,7 +2,7 @@
 
 namespace UserInterfaceWindows
 {
-    class ButtonInMatrix :Button
+    class ButtonInMatrix : Button
     {
 
         private readonly int r_RowNumber;

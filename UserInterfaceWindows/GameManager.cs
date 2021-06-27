@@ -12,7 +12,7 @@ namespace UserInterfaceWindows
         private readonly GameLogic.GameLogic r_Game;
         private GameBoardForm m_GameBoardForm;
         private readonly bool r_Player2IsComputer;
-        private readonly (int, int) m_QuitPoint = (-1, -1);
+        private readonly (int, int) r_QuitPoint = (-1, -1);
 
         internal GameManager(StartGameForm i_SettingsForm)
         {
@@ -34,7 +34,7 @@ namespace UserInterfaceWindows
 
         public (int, int) QuitPoint
         {
-            get { return m_QuitPoint; }
+            get { return r_QuitPoint; }
         }
 
         public string Player1Name
@@ -45,7 +45,7 @@ namespace UserInterfaceWindows
         {
             get { return r_Player2Name; }
         }
-        public bool Player2isComputer
+        public bool Player2IsComputer
         {
             get { return r_Player2IsComputer; }
         }

@@ -11,13 +11,13 @@ namespace UserInterfaceWindows
         private readonly ButtonInMatrix[,] r_ButtonsTable;
         private Label m_LabelPlayer1Score;
         private Label m_LabelPlayer2Score;
-        private readonly GameManager m_GameManager;
+        private readonly GameManager r_GameManager;
 
         public GameBoardForm(int i_Size, GameManager i_GameManager)
         {
             r_Size = i_Size;
             r_ButtonsTable = new ButtonInMatrix[r_Size, r_Size];
-            m_GameManager = i_GameManager;
+            r_GameManager = i_GameManager;
 
             initButtonsTableButton();
             InitializeComponent();
@@ -31,12 +31,12 @@ namespace UserInterfaceWindows
                  r_ButtonsTable[r_Size - 1, 0].Bottom);
               
             this.m_LabelPlayer1Score.Text =
-                $@"{m_GameManager.Player1Name} : {m_GameManager.GetNumberOfWinPlayer1()} ";
+                $@"{r_GameManager.Player1Name} : {r_GameManager.GetNumberOfWinPlayer1()} ";
 
             this.m_LabelPlayer2Score.Left = m_LabelPlayer1Score.Right + 10;
             this.m_LabelPlayer2Score.Top = m_LabelPlayer1Score.Top;
             this.m_LabelPlayer2Score.Text =
-                $@"{m_GameManager.Player2Name} : {m_GameManager.GetNumberOfWinPlayer2()} ";
+                $@"{r_GameManager.Player2Name} : {r_GameManager.GetNumberOfWinPlayer2()} ";
         }
 
         private void initButtonsTableButton()
@@ -74,7 +74,7 @@ namespace UserInterfaceWindows
             int rowNumber = (sender as ButtonInMatrix).RowNumber;
             int colNumber = (sender as ButtonInMatrix).ColNumber;
             (int row, int col) newPoint = (rowNumber, colNumber);
-            m_GameManager.ValidPointFromUser(newPoint);
+            r_GameManager.ValidPointFromUser(newPoint);
         }
 
         // This naming is due to the save word for designer
@@ -128,7 +128,7 @@ namespace UserInterfaceWindows
         {
             if(e.CloseReason.Equals(CloseReason.UserClosing))
             {
-                m_GameManager.ValidPointFromUser(m_GameManager.QuitPoint);
+                r_GameManager.ValidPointFromUser(r_GameManager.QuitPoint);
             }
         }
 
@@ -159,20 +159,20 @@ The winner in this round is :
         {
             MessageBox.Show(
                 $@"{i_LoserName} Quit from the Game! The winner in this round is :
-    {i_WinnerName} ! Who play with {(Char)i_SignOfTheWinner}");
+    {i_WinnerName} ! Who play with {(char)i_SignOfTheWinner}");
         }
 
         internal bool IsWantAnotherGame()
         {
             bool isWantAnother;
-            const string wantAnotherGameMessage = "Do you want to play another game?";
-            const string wantAnotherGameTitle = "Another Game";
-            const MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            string wantAnotherGameMessage = "Do you want to play another game?";
+            string wantAnotherGameTitle = "Another Game";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
 
             DialogResult resultFromUser = MessageBox.Show(wantAnotherGameMessage, wantAnotherGameTitle, buttons);
             if(resultFromUser == DialogResult.No)
             {
-                string finalResult = $@"{m_GameManager.Player1Name} : {m_GameManager.GetNumberOfWinPlayer1()}  {m_GameManager.Player2Name} : {m_GameManager.GetNumberOfWinPlayer2()} ";
+                string finalResult = $@"{r_GameManager.Player1Name} : {r_GameManager.GetNumberOfWinPlayer1()}  {r_GameManager.Player2Name} : {r_GameManager.GetNumberOfWinPlayer2()} ";
 
                 MessageBox.Show($@"Thank you for playing with us! 
 the final Result is :
@@ -183,7 +183,7 @@ see you next Semester ;) ","Goodbye");
             }
             else
             {
-                m_GameManager.MakeNewGame();
+                r_GameManager.MakeNewGame();
                 this.Hide();
                 isWantAnother = true;
             }
