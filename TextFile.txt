@@ -1,0 +1,19 @@
+==========================Exercise Checking Report==========================
+Exercise No...........: 5
+First Student Details.: 312344138 - Omer Mar Chaim
+Second Student Details: 206036501 - Omri Cohen
+Delivery Date.........: 27/06/2021
+Delivered In Delay....: No
+Delay Reason..........: /0
+Visual Studio Version.: 2019
+Comments..............: 
+We made three delegates raised from the Logic Layer and handled it in the UI layer for updating the display . 
+The first is Action delegate that is raised from the Board Class in the Logic and handled at the GameManger class in the UI .
+this Delegate sets the point at GameBoardForm form at the exact point.
+The Second is Event Handler. We made a new GameOverEventArgs Which is a class that extends from EventArgs and holds the current game Status and the winnerPlayer.
+when there is GameOver this EventHandler notify the Lisner at Game Manger at the Ui , which shows the direct message on the Screen .
+The third is a delegate that reports for every change in CurrentPlayer and shows it in the UI form.
+also we add functionality of the Exit button which implements the Q sign of the UI Of game 2 .
+we add Colors to the gameBoardForm while the button is clicked.
+
+=======================End Exercise Checking Report=========================
