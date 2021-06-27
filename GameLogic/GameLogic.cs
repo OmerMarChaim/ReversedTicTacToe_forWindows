@@ -3,11 +3,15 @@ using System.Linq;
 
 namespace GameLogic
 {
+    /// <summary>
+    /// delegate to report if gameOver happen
+    /// </summary>
     public delegate void GameOverEventHandler(object sender, GameOverEventArgs e);
 
-
     public class GameLogic
-    {
+    { /// <summary>
+        /// delegate to report who play the next move
+        /// </summary>
         public event Action<Player> ReportChangePlayerDelegates;
 
         public event GameOverEventHandler GameOver;
@@ -78,7 +82,6 @@ namespace GameLogic
         {
             for(int i = 0; i < 2; i++)
             {
-                // i_Point = i_GameUi.GetValidPointFromUser(player.Sign); // the slot is in range and free   
                 if(m_CurrentPlayer.IsComputer)
                 {
                     i_Point = getRandomPointForComputer();
@@ -276,29 +279,6 @@ namespace GameLogic
             bool isEmptySpot = this.GameBoard.IsEmptySpot(i_Row, i_Column);
 
             return isEmptySpot;
-        }
-
-        public bool IsInBoardRangeSize(int i_Number)
-        {
-            const int k_MinValuePossibleEnterToBoard = 1;
-
-            bool isInRangeOfBoard = i_Number >= k_MinValuePossibleEnterToBoard && i_Number < this.GameBoard.Size;
-
-            return isInRangeOfBoard;
-        }
-
-        internal bool IsValidSpot(int i_Row, int i_Col)
-        {
-            bool isValidSpot = this.IsEmptySpot(i_Row, i_Col);
-
-            return isValidSpot;
-        }
-
-        public static bool IsValidSizeBoard(int i_Number)
-        {
-            bool isValidSizeBoard = k_MinBoardSize <= i_Number & k_MaxBoardSize >= i_Number;
-
-            return isValidSizeBoard;
         }
 
         public void PreparingForAnotherGame()

@@ -5,8 +5,10 @@ namespace GameLogic
 {
     public class Board
     {
+        /// <summary>
+        /// delegate to report which spot chosen by player.
+        /// </summary>
         public event Action<(int row, int column), ePlayersMark> ReportNewPointDelegates;
-
         private readonly int r_Size;
         private ePlayersMark[,] m_Board;
         private readonly HashSet<(int, int)> r_FreeSpots;

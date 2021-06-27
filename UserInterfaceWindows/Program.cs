@@ -12,7 +12,6 @@ namespace UserInterfaceWindows
         {
             StartGameForm startGameForm = new StartGameForm();
             startGameForm.ShowDialog();
-            
         }
     }
 }
